@@ -8,7 +8,7 @@ export default function Header() {
           <img
             className="site-logo"
             alt="Karimunjawa Tours"
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdfobKy1iQfmSFdu8blFaC07yzAPouE0maTg7tmC8eNXg2yMNv4kRRzh0R_xSFlZ3UDnSJnU1FDATTbIxJhhTo6ykIub6s3ULqyu20kanqL36zgHzYCWgCrCMoerVpymIcX-0mPKL1J1uYEL-K7pRBS4zABDNbDAHD5Gg5SL1ypmNdZisuYx5ozvTKvrp3/s1600/satu.png"
+            src="/images/satu.png"
           />
         </Link>
         <nav className="main-nav">
