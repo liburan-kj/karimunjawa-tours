@@ -12,7 +12,7 @@ type Package = {
 const packages: Package[] = [
   { slug: "2h1m-hotel", title: "2 Hari 1 Malam Hotel", duration: "2 Hari 1 Malam", price: "Mulai 1280K",
     desc: "Perjalanan seru, fasilitas lengkap, serta istirahat nyaman di hotel pilihan. Cocok untuk kamu yang ingin melepas penat dengan liburan singkat namun berkesan.",
-    img: "images/2h1mhotel.webp" },
+    img: "/images/2h1mhotel.webp" },
   { slug: "3h2m-hotel", title: "3 Hari 2 Malam Hotel", duration: "3 Hari 2 Malam", price: "Mulai 1770K",
     desc: "Menikmati aktivitas seru, dan tetap beristirahat nyaman di hotel pilihan. Cocok untuk liburan santai dengan jadwal fleksibel.",
     img: "/images/3h2mhotel.webp" },
