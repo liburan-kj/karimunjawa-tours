@@ -12,22 +12,22 @@ type Package = {
 const packages: Package[] = [
   { slug: "2h1m-hotel", title: "2 Hari 1 Malam Hotel", duration: "2 Hari 1 Malam", price: "Mulai 1280K",
     desc: "Perjalanan seru, fasilitas lengkap, serta istirahat nyaman di hotel pilihan. Cocok untuk kamu yang ingin melepas penat dengan liburan singkat namun berkesan.",
-    img: "/images/2h1mhotel.webp" },
+    img: "/images/2h1mhotel.jpg" },
   { slug: "3h2m-hotel", title: "3 Hari 2 Malam Hotel", duration: "3 Hari 2 Malam", price: "Mulai 1770K",
     desc: "Menikmati aktivitas seru, dan tetap beristirahat nyaman di hotel pilihan. Cocok untuk liburan santai dengan jadwal fleksibel.",
-    img: "/images/3h2mhotel.webp" },
+    img: "/images/3h2mhotel.jpg" },
   { slug: "4h3m-hotel", title: "4 Hari 3 Malam Hotel", duration: "4 Hari 3 Malam", price: "Mulai 2270K",
     desc: "Cocok untuk kamu yang ingin liburan santai sekaligus mendalam, dengan waktu cukup untuk merasakan semua keindahan dan keseruan perjalanan.",
-    img: "/images/4h3mhotel.webp" },
+    img: "/images/4h3mhotel.jpg" },
   { slug: "2h1m-homestay", title: "2 Hari 1 Malam Homestay", duration: "2 Hari 1 Malam", price: "Mulai 610K",
     desc: "Pengalaman hangat dan ramah. Dengan fasilitas sederhana namun nyaman, liburanmu tetap berkesan dan penuh cerita.",
-    img: "/images/2h1mhomestay.webp" },
+    img: "/images/2h1mhomestay.jpg" },
   { slug: "3h2m-homestay", title: "3 Hari 2 Malam Homestay", duration: "3 Hari 2 Malam", price: "Mulai 920K",
     desc: "Menikmati suasana ramah khas warga lokal, sekaligus menjelajahi destinasi dengan waktu lebih leluasa.",
-    img: "/images/3h2mhomestay.webp" },
+    img: "/images/3h2mhomestay.jpg" },
   { slug: "4h3m-homestay", title: "4 Hari 3 Malam Homestay", duration: "4 Hari 3 Malam", price: "Mulai 1180K",
     desc: "Merasakan keramahan warga lokal, menikmati aktivitas wisata lebih lengkap, dan beristirahat nyaman dalam suasana akrab.",
-    img: "/images/4h3mhomestay.webp" },
+    img: "/images/4h3mhomestay.jpg" },
 ];
 
 export default function PackageGrid() {
