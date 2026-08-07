@@ -1,0 +1,150 @@
+{
+  "HAPPINEZZ HILLS": {
+    "Double": [
+      "/images/rooms/happinezz-hills/double/1.jpg",
+      "/images/rooms/happinezz-hills/double/2.jpg",
+      "/images/rooms/happinezz-hills/double/3.jpg",
+      "/images/rooms/happinezz-hills/double/4.jpg",
+      "/images/rooms/happinezz-hills/double/5.jpg",
+      "/images/rooms/happinezz-hills/double/6.jpg",
+      "/images/rooms/happinezz-hills/double/7.jpg"
+    ],
+    "Twin": [
+      "/images/rooms/happinezz-hills/twin/1.jpg",
+      "/images/rooms/happinezz-hills/twin/2.jpg",
+      "/images/rooms/happinezz-hills/twin/3.jpg",
+      "/images/rooms/happinezz-hills/twin/4.jpg",
+      "/images/rooms/happinezz-hills/twin/5.jpg",
+      "/images/rooms/happinezz-hills/twin/6.jpg"
+    ],
+    "Family Bungalow": [
+      "/images/rooms/happinezz-hills/family-bungalow/1.jpg",
+      "/images/rooms/happinezz-hills/family-bungalow/2.jpg",
+      "/images/rooms/happinezz-hills/family-bungalow/3.jpg",
+      "/images/rooms/happinezz-hills/family-bungalow/4.jpg",
+      "/images/rooms/happinezz-hills/family-bungalow/5.jpg",
+      "/images/rooms/happinezz-hills/family-bungalow/6.jpg",
+      "/images/rooms/happinezz-hills/family-bungalow/7.jpg"
+    ],
+    "Executive Villa": [
+      "/images/rooms/happinezz-hills/executive-villa/1.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/2.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/3.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/4.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/5.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/6.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/7.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/8.jpg",
+      "/images/rooms/happinezz-hills/executive-villa/9.jpg"
+    ]
+  },
+  "HALO RESORT": {
+    "Executive Sea View": [
+      "/images/rooms/halo-resort/executive-sea-view/1.jpg",
+      "/images/rooms/halo-resort/executive-sea-view/2.jpg"
+    ],
+    "Executive No View": [
+      "/images/rooms/halo-resort/executive-no-view/1.jpg",
+      "/images/rooms/halo-resort/executive-no-view/2.jpg"
+    ],
+    "Signature": [
+      "/images/rooms/halo-resort/signature/1.jpg",
+      "/images/rooms/halo-resort/signature/2.jpg",
+      "/images/rooms/halo-resort/signature/3.jpg",
+      "/images/rooms/halo-resort/signature/4.jpg",
+      "/images/rooms/halo-resort/signature/5.jpg"
+    ],
+    "Grandeur Deluxe": [
+      "/images/rooms/halo-resort/grandeur-deluxe/1.jpg",
+      "/images/rooms/halo-resort/grandeur-deluxe/2.jpg",
+      "/images/rooms/halo-resort/grandeur-deluxe/3.jpg",
+      "/images/rooms/halo-resort/grandeur-deluxe/4.jpg",
+      "/images/rooms/halo-resort/grandeur-deluxe/5.jpg"
+    ],
+    "Grandeur Signature": [
+      "/images/rooms/halo-resort/grandeur-signature/1.jpg",
+      "/images/rooms/halo-resort/grandeur-signature/2.jpg",
+      "/images/rooms/halo-resort/grandeur-signature/3.jpg",
+      "/images/rooms/halo-resort/grandeur-signature/4.jpg",
+      "/images/rooms/halo-resort/grandeur-signature/5.jpg"
+    ]
+  },
+  "OMAH ALCHY": {
+    "Cendana Cottage": [
+      "/images/rooms/omah-alchy/cendana-cottage/1.jpg",
+      "/images/rooms/omah-alchy/cendana-cottage/2.jpg",
+      "/images/rooms/omah-alchy/cendana-cottage/3.jpg",
+      "/images/rooms/omah-alchy/cendana-cottage/4.jpg",
+      "/images/rooms/omah-alchy/cendana-cottage/5.jpg",
+      "/images/rooms/omah-alchy/cendana-cottage/6.jpg"
+    ],
+    "Cendana Family Cottage": [
+      "/images/rooms/omah-alchy/cendana-family-cottage/1.jpg",
+      "/images/rooms/omah-alchy/cendana-family-cottage/2.jpg",
+      "/images/rooms/omah-alchy/cendana-family-cottage/3.jpg",
+      "/images/rooms/omah-alchy/cendana-family-cottage/4.jpg"
+    ],
+    "Waru Cottage": [
+      "/images/rooms/omah-alchy/waru-cottage/1.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/2.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/3.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/4.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/5.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/6.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/7.jpg",
+      "/images/rooms/omah-alchy/waru-cottage/8.jpg"
+    ],
+    "Cemara Cottage": [
+      "/images/rooms/omah-alchy/cemara-cottage/1.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/2.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/3.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/4.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/5.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/6.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/7.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/8.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/9.jpg",
+      "/images/rooms/omah-alchy/cemara-cottage/10.jpg"
+    ]
+  },
+  "JAVA PARADISE RESORT": {
+    "Standard Queen/Twin": [
+      "/images/rooms/java-paradise-resort/standard-queen-twin/1.jpg"
+    ],
+    "Superior Queen/Twin": [
+      "/images/rooms/java-paradise-resort/superior-queen-twin/1.jpg",
+      "/images/rooms/java-paradise-resort/superior-queen-twin/2.jpg",
+      "/images/rooms/java-paradise-resort/superior-queen-twin/3.jpg",
+      "/images/rooms/java-paradise-resort/superior-queen-twin/4.jpg"
+    ],
+    "Deluxe Queen": [
+      "/images/rooms/java-paradise-resort/deluxe-queen/1.jpg",
+      "/images/rooms/java-paradise-resort/deluxe-queen/2.jpg",
+      "/images/rooms/java-paradise-resort/deluxe-queen/3.jpg",
+      "/images/rooms/java-paradise-resort/deluxe-queen/4.jpg",
+      "/images/rooms/java-paradise-resort/deluxe-queen/5.jpg"
+    ],
+    "Executive King": [
+      "/images/rooms/java-paradise-resort/executive-king/1.jpg",
+      "/images/rooms/java-paradise-resort/executive-king/2.jpg",
+      "/images/rooms/java-paradise-resort/executive-king/3.jpg",
+      "/images/rooms/java-paradise-resort/executive-king/4.jpg",
+      "/images/rooms/java-paradise-resort/executive-king/5.jpg"
+    ],
+    "Family": [
+      "/images/rooms/java-paradise-resort/family/1.jpg",
+      "/images/rooms/java-paradise-resort/family/2.jpg",
+      "/images/rooms/java-paradise-resort/family/3.jpg",
+      "/images/rooms/java-paradise-resort/family/4.jpg"
+    ],
+    "Suite": [
+      "/images/rooms/java-paradise-resort/suite/1.jpg",
+      "/images/rooms/java-paradise-resort/suite/2.jpg",
+      "/images/rooms/java-paradise-resort/suite/3.jpg",
+      "/images/rooms/java-paradise-resort/suite/4.jpg",
+      "/images/rooms/java-paradise-resort/suite/5.jpg",
+      "/images/rooms/java-paradise-resort/suite/6.jpg",
+      "/images/rooms/java-paradise-resort/suite/7.jpg"
+    ]
+  }
+}
