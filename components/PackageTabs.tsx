@@ -10,15 +10,17 @@ export default function PackageTabs({
   packageName,
   itineraryExpress,
   itinerarySiginjai,
+  facilities: customFacilities,
 }: {
   hotels: HotelsData;
   packageName: string;
   itineraryExpress: ItineraryDay[];
   itinerarySiginjai: ItineraryDay[];
+  facilities?: [string, string][];
 }) {
   const [tab, setTab] = useState<"express" | "siginjai">("express");
 
-  const facilities = [
+  const defaultFacilities: [string, string][] = [
     ["⚓", "Retribusi Penumpang Pelabuhan Jepara"],
     ["🚢", "Tiket kapal Jepara–Karimunjawa (PP)"],
     ["🛡️", "Asuransi perjalanan kapal"],
@@ -35,6 +37,8 @@ export default function PackageTabs({
     ["💧", "Air mineral saat tour laut"],
     ["📸", "Dokumentasi (termasuk bawah air)"],
   ];
+
+  const facilities = customFacilities || defaultFacilities;
 
   const excluded = [
     "Obat-obatan pribadi",
