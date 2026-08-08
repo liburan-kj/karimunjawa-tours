@@ -31,7 +31,6 @@ export default async function ArtikelPage() {
           {articles.map((article) => (
             <div className="page-card" key={article.id}>
               <div className="page-card-body">
-                <span className="page-card-category">ARTIKEL</span>
                 <h3 className="page-card-title">
                   <Link href={`/artikel/${article.slug}`}>{article.title}</Link>
                 </h3>
