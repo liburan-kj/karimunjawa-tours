@@ -318,3 +318,15 @@ a { text-decoration: none; color: var(--ocean-blue); transition: all 0.3s ease; 
   .ig-username-row { justify-content: center; }
   .ig-stats { justify-content: center; font-size: 13px; gap: 15px; }
 }
+/* ARTIKEL */
+.article-body {
+  text-align: justify;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #2b3b4b;
+}
+.article-body p { margin-bottom: 16px; }
+.article-body img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
+.article-body h2, .article-body h3 { color: #023e8a; margin: 28px 0 14px; text-align: left; }
+.article-body a { color: #0a5c8a; text-decoration: underline; }
+.article-body ul, .article-body ol { margin: 0 0 16px 20px; }
