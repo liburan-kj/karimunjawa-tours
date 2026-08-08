@@ -30,11 +30,6 @@ export default async function ArtikelPage() {
         <div className="pages-grid">
           {articles.map((article) => (
             <div className="page-card" key={article.id}>
-              {article.featuredImage && (
-                <Link className="page-card-image-wrap" href={`/artikel/${article.slug}`}>
-                  <img className="page-card-img" loading="lazy" alt={article.title} src={article.featuredImage} />
-                </Link>
-              )}
               <div className="page-card-body">
                 <span className="page-card-category">ARTIKEL</span>
                 <h3 className="page-card-title">

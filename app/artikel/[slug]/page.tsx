@@ -40,13 +40,7 @@ export default async function ArticleDetailPage({ params }: { params: { slug: st
         {article.title}
       </h1>
 
-      {article.featuredImage && (
-        <img
-          src={article.featuredImage}
-          alt={article.title}
-          style={{ width: "100%", borderRadius: 14, marginBottom: 30 }}
-        />
-      )}
+      
 
       <div className="article-body" dangerouslySetInnerHTML={{ __html: article.content }} />
     </article>
