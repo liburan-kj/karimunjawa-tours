@@ -98,7 +98,7 @@ export default async function Page() {
     "@type": "Product",
     name: PACKAGE_NAME,
     description: metadata.description,
-    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjThGnJtBMer8qZXrUTO1gQp_MaXD9OtjuxQRYkmkDm5r1DCqublbogIVif96iDaqx_A7z2wvUTIoGBwHPprFG6fNKpwVAg21vElfXxprvAEfAQqWqJbbEadeAny4fCD5cheLAfeyRcbNNxU09K0AhkgF8Q0RRsafTtonhXtkQYVp-iDDzwqJCuCobNS9A/s1600/_DSC0098.webp",
+    image: "https://karimunjawa.tours/images/2h1mhotel.jpg",
     brand: { "@type": "Brand", name: "Karimunjawa Tours" },
     offers: {
       "@type": "AggregateOffer",

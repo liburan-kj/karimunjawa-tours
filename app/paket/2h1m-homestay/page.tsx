@@ -102,8 +102,7 @@ export default async function Page() {
     "@type": "Product",
     name: PACKAGE_NAME,
     description: metadata.description,
-    image:
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgI1vTcce_oz3i7fi84xTcGysvufpHB-Yv5mG1mJQrfH9MbUjcdXcsTPsfgxohwv3yQ_GXvAQUhMxyAdr8KY0x1RWprwAYwoZqyA4G3eFG7CAKlPfcyiwKbqqokholdDwjzQ3TU0frQlWNr2JAUGVQkvPCUHm1CgMk4TujC5eTu9AcIvx5Lb71B5eFi5xU/s1600/DSC00293.webp",
+    image: "https://karimunjawa.tours/images/2h1mhomestay.jpg",
     brand: { "@type": "Brand", name: "Karimunjawa Tours" },
     offers: {
       "@type": "AggregateOffer",
