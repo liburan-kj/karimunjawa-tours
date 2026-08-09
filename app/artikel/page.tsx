@@ -36,7 +36,7 @@ export default async function ArtikelPage() {
                 </h3>
                 <p className="page-card-desc">{article.excerpt.slice(0, 140)}...</p>
                 <div className="page-card-footer">
-                  <span className="page-card-meta">📅 {formatDate(article.date)}</span>
+                  
                   <Link className="page-card-link" href={`/artikel/${article.slug}`}>
                     Baca Selengkapnya →
                   </Link>

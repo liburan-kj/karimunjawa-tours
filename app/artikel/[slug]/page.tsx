@@ -6,8 +6,9 @@ export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const article = await getArticleBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   if (!article) return {};
   return {
     title: `${article.title} - Karimunjawa Tours`,
@@ -28,13 +29,14 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export default async function ArticleDetailPage({ params }: { params: { slug: string } }) {
-  const article = await getArticleBySlug(params.slug);
+export default async function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   return (
     <article style={{ maxWidth: 800, margin: "40px auto", padding: "0 20px" }}>
-      <p style={{ color: "#888", fontSize: 14, marginBottom: 10 }}>📅 {formatDate(article.date)}</p>
+      
 
       <h1 style={{ color: "#023e8a", fontSize: 32, fontWeight: 700, marginBottom: 24, lineHeight: 1.3 }}>
         {article.title}
