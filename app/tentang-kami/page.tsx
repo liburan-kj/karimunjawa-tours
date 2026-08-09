@@ -4,7 +4,30 @@ export const metadata = {
 };
 
 export default function TentangKamiPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Karimunjawa Tours",
+    url: "https://karimunjawa.tours",
+    logo: "https://karimunjawa.tours/images/satu.jpg",
+    foundingDate: "2015",
+    telephone: "+62-822-2533-6306",
+    email: "liburan@karimunjawa.tours",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Karimunjawa, Jepara",
+      addressRegion: "Jawa Tengah",
+      addressCountry: "ID",
+    },
+    sameAs: ["https://www.instagram.com/karimunjawa.tours"],
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <div className="kjt-about-wrap">
       <div className="kjt-card">
         <div className="kjt-dot" style={{ width: 120, height: 120, background: "var(--sun)", top: -30, right: 60 }} />
@@ -93,5 +116,6 @@ export default function TentangKamiPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
