@@ -330,3 +330,12 @@ a { text-decoration: none; color: var(--ocean-blue); transition: all 0.3s ease; 
 .article-body h2, .article-body h3 { color: #023e8a; margin: 28px 0 14px; text-align: left; }
 .article-body a { color: #0a5c8a; text-decoration: underline; }
 .article-body ul, .article-body ol { margin: 0 0 16px 20px; }
+
+/* GOOGLE REVIEWS - TINGGI CARD TETAP (FIXED) */
+.carousel__card,
+.css-b1vrbs {
+  height: 240px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
