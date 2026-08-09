@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
 import PackageGrid from "../components/PackageGrid";
+import Reviews from "../components/Reviews";
 import CTASection from "../components/CTASection";
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
       />
       <Hero />
       <PackageGrid />
+      <Reviews />
       <CTASection />
     </>
   );
