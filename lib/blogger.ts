@@ -28,13 +28,17 @@ function extractFirstImage(html: string): string | null {
   const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
   return match ? match[1] : null;
 }
+function unwrapImageLinks(html: string): string {
+  return html.replace(/<a\b[^>]*>(\s*<img[^>]*>\s*)<\/a>/gi, "$1");
+}
 
 function resizeBloggerThumb(url: string, size = 1200): string {
   return url.replace(/\/s\d+(-c)?\//, `/s${size}/`);
 }
 
 function mapEntry(entry: any): Article {
-  const content = entry.content?.$t || entry.summary?.$t || "";
+  const rawContent = entry.content?.$t || entry.summary?.$t || "";
+  const content = unwrapImageLinks(rawContent);
   const plainText = stripHtml(content);
 
   const thumb = entry.media$thumbnail?.url;
