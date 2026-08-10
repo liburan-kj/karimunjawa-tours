@@ -20,7 +20,6 @@ export default async function ArtikelPage() {
   return (
     <section className="pages-grid-section">
       <h1 className="pages-grid-title">
-        <span className="pages-grid-subtitle">BLOG</span>
         Artikel Karimunjawa Tours
       </h1>
 
