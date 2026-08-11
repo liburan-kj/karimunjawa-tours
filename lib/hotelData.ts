@@ -12,19 +12,26 @@ export type Room = {
   notes: string;
 };
 
-export type HotelsData = Record<string, Room[]>;
+export type PropertyData = Record<string, Room[]>;
 
 const CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDiRFwAYEXCHQbMU5H7tnH2xVw9pVJwtb4omMCfpmvwc9212eFk-nLfNVtZnrSTXeGKFQsEfNvHSoR/pub?gid=344775843&single=true&output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQBsJeoogNBQPSsszh88Uboxg65F48jIxaOx10lbXMIWECZVzbtBfju-PaANbUf5MgMqyrODvenStDH/pub?gid=173893534&single=true&output=csv";
+
+// Index kolom harga per durasi: [SIGINJAI, EXPRESS]
+const DURATION_COL_INDEX: Record<"2h1m" | "3h2m" | "4h3m", { sig: number; exp: number }> = {
+  "2h1m": { sig: 2, exp: 5 },
+  "3h2m": { sig: 3, exp: 6 },
+  "4h3m": { sig: 4, exp: 7 },
+};
 
 const DETAIL_COLS = {
-  photos: 17,
-  roomSize: 18,
-  capacity: 19,
-  bedType: 20,
-  view: 21,
-  facilities: 22,
-  notes: 23,
+  photos: 9,
+  roomSize: 10,
+  capacity: 11,
+  bedType: 12,
+  view: 13,
+  facilities: 14,
+  notes: 15,
 };
 
 export const TARGET_HOTELS = [
@@ -34,9 +41,14 @@ export const TARGET_HOTELS = [
   "OMAH ALCHY",
 ];
 
+const HOMESTAY_GROUP = "HOMESTAY";
+
 function splitList(raw: string | undefined): string[] {
   if (!raw) return [];
-  return raw.split("|").map((s) => s.trim()).filter(Boolean);
+  return raw
+    .split("|")
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 function toNumber(s: string | undefined): number | null {
@@ -57,46 +69,88 @@ function parseCSV(text: string): string[][] {
     const c = text[i];
     if (inQuotes) {
       if (c === '"') {
-        if (text[i + 1] === '"') { field += '"'; i++; }
-        else { inQuotes = false; }
+        if (text[i + 1] === '"') {
+          field += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
       } else field += c;
     } else {
       if (c === '"') inQuotes = true;
-      else if (c === ",") { row.push(field); field = ""; }
-      else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
-      else if (c === "\r") { /* skip */ }
-      else field += c;
+      else if (c === ",") {
+        row.push(field);
+        field = "";
+      } else if (c === "\n") {
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = "";
+      } else if (c === "\r") {
+        /* skip */
+      } else field += c;
     }
   }
-  if (field.length || row.length) { row.push(field); rows.push(row); }
+  if (field.length || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
   return rows;
 }
 
-function extractHotels(rows: string[][], durationCols: { sig: number; exp: number }): HotelsData {
-  const hotels: HotelsData = {};
-  let current: string | null = null;
+function extractAll(
+  rows: string[][],
+  colIndex: { sig: number; exp: number }
+): PropertyData {
+  const data: PropertyData = {};
+  let mode: "none" | "homestay" | "hotel" = "none";
+  let currentGroup: string | null = null;
 
   for (const r of rows) {
     const name = (r[0] || "").trim();
     if (!name) continue;
 
-    const isiRaw = (r[1] || "").trim();
-    const isiNum = toNumber(isiRaw);
+    const upperName = name.toUpperCase();
 
-    if (isiNum === null) {
-      const key = name.toUpperCase();
-      current = TARGET_HOTELS.includes(key) ? key : null;
-      if (current && !hotels[current]) hotels[current] = [];
+    // Deteksi section header
+    if (upperName === "HOMESTAY") {
+      mode = "homestay";
+      currentGroup = HOMESTAY_GROUP;
+      data[currentGroup] = [];
+      continue;
+    }
+    if (upperName === "HOTEL") {
+      mode = "hotel";
+      currentGroup = null;
       continue;
     }
 
-    if (current) {
-      const sig = toNumber(r[durationCols.sig]);
-      const exp = toNumber(r[durationCols.exp]);
+    const kapRaw = (r[1] || "").trim();
+    const kapNum = toNumber(kapRaw);
+
+    // Baris header kolom (mis. "ISI", "SIGINJAI", dst) - skip
+    if (upperName === "ISI" || upperName === "SIGINJAI" || upperName === "EXPRESS") {
+      continue;
+    }
+
+    if (mode === "hotel") {
+      // Baris nama properti hotel: kolom kapasitas kosong / bukan angka
+      if (kapNum === null) {
+        currentGroup = TARGET_HOTELS.includes(upperName) ? upperName : null;
+        if (currentGroup && !data[currentGroup]) data[currentGroup] = [];
+        continue;
+      }
+    }
+
+    if (!currentGroup) continue;
+
+    if (kapNum !== null) {
+      const sig = toNumber(r[colIndex.sig]);
+      const exp = toNumber(r[colIndex.exp]);
       if (sig !== null && exp !== null) {
-        hotels[current].push({
+        data[currentGroup].push({
           room: name,
-          kap: isiRaw,
+          kap: kapRaw,
           sig: Math.round(sig),
           exp: Math.round(exp),
           photos: splitList(r[DETAIL_COLS.photos]),
@@ -111,14 +165,22 @@ function extractHotels(rows: string[][], durationCols: { sig: number; exp: numbe
     }
   }
 
-  return hotels;
+  return data;
 }
 
-// durationCols beda per halaman: 2H1M = {sig:10, exp:13}, 3H2M = {sig:11, exp:14}, 4H3M = {sig:12, exp:15}
-export async function getHotelData(durationCols: { sig: number; exp: number }): Promise<HotelsData> {
+export async function getHotelData(
+  duration: "2h1m" | "3h2m" | "4h3m"
+): Promise<PropertyData> {
   const res = await fetch(CSV_URL, { next: { revalidate: 3600 } });
-  if (!res.ok) throw new Error("Gagal fetch data hotel: " + res.status);
+  if (!res.ok) throw new Error("Gagal fetch data harga: " + res.status);
   const text = await res.text();
   const rows = parseCSV(text);
-  return extractHotels(rows, durationCols);
+  return extractAll(rows, DURATION_COL_INDEX[duration]);
+}
+
+export async function getHomestayData(
+  duration: "2h1m" | "3h2m" | "4h3m"
+): Promise<Room[]> {
+  const all = await getHotelData(duration);
+  return all[HOMESTAY_GROUP] || [];
 }

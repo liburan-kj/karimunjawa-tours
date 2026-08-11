@@ -20,7 +20,7 @@ export default async function ArtikelPage() {
   return (
     <section className="pages-grid-section">
       <h1 className="pages-grid-title">
-        Artikel Karimunjawa Tours
+      Artikel Karimunjawa Tours
       </h1>
 
       {articles.length === 0 ? (

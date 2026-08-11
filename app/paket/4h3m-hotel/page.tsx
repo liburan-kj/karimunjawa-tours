@@ -9,8 +9,7 @@ export const metadata = {
   description: "Paket wisata 4 hari 3 malam ke Karimunjawa dengan akomodasi hotel, termasuk island hopping, snorkeling, dan transportasi kapal.",
 };
 
-const DURATION_COLS = { sig: 12, exp: 15 };
-const PACKAGE_NAME = "Paket Wisata Karimunjawa 4H3M (Hotel)";
+const hotels = await getHotelData("4h3m"); // sesuaikan "3h2m"/"4h3m" per halaman
 
 const itineraryExpress: ItineraryDay[] = [
   {
@@ -185,8 +184,8 @@ const itinerarySiginjai: ItineraryDay[] = [
 ];
 
 export default async function Page() {
-  const hotels = await getHotelData(DURATION_COLS);
-
+  const hotels = await getHotelData("4h3m");
+  const PACKAGE_NAME = "Paket Wisata Karimunjawa 4H3M (Hotel)";
   const allSigPrices = Object.values(hotels).flat().map((r) => r.sig);
   const allExpPrices = Object.values(hotels).flat().map((r) => r.exp);
   const lowPrice = allSigPrices.length ? Math.min(...allSigPrices) * 1000 : 2270000;
