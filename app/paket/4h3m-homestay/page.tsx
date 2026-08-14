@@ -3,6 +3,7 @@ import { getHomestayData } from "../../../lib/homestayData";
 import HomestayPackageTabs from "../../../components/HomestayPackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
 import type { ItineraryDay } from "../../../components/Itinerary";
+import { getReviews } from "../../../lib/reviews";
 
 export const metadata = {
   title: "Paket Wisata Karimunjawa 4 Hari 3 Malam Homestay - Karimunjawa Tours",
@@ -10,7 +11,6 @@ export const metadata = {
     "Paket wisata 4 hari 3 malam ke Karimunjawa dengan akomodasi homestay, termasuk island hopping, snorkeling, dan transportasi kapal.",
 };
 
-const homestayGroups = await getHomestayData("4h3m"); // sesuaikan per halaman
 const PACKAGE_NAME = "Paket Wisata Karimunjawa 4H3M (Homestay)";
 
 const itineraryExpress: ItineraryDay[] = [
@@ -187,6 +187,7 @@ const itinerarySiginjai: ItineraryDay[] = [
 
 export default async function Page() {
   const groups = await getHomestayData("4h3m");
+  const { reviews, averageRating, reviewCount } = await getReviews();
 
   const allItems = groups.flatMap((g) => g.items);
   const allSigPrices = allItems.map((r) => r.sig);
@@ -203,6 +204,18 @@ export default async function Page() {
     description: metadata.description,
     image: "https://karimunjawa.tours/images/4h3mhomestay.jpg",
     brand: { "@type": "Brand", name: "Karimunjawa Tours" },
+    aggregateRating: reviewCount > 0 ? {
+      "@type": "AggregateRating",
+      ratingValue: averageRating,
+      reviewCount: reviewCount,
+    } : undefined,
+    review: reviews.slice(0, 5).map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.authorName },
+      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+      reviewBody: r.text,
+      datePublished: r.publishedAt,
+    })),
     offers: {
       "@type": "AggregateOffer",
       url: "https://karimunjawa.tours/paket/4h3m-homestay",

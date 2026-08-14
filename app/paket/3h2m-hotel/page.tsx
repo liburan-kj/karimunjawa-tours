@@ -2,6 +2,7 @@ import { getHotelData } from "../../../lib/hotelData";
 import PackageTabs from "../../../components/PackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
 import type { ItineraryDay } from "../../../components/Itinerary";
+import { getReviews } from "../../../lib/reviews";
 
 export const metadata = {
   title: "Paket Wisata Karimunjawa 3 Hari 2 Malam Hotel - Karimunjawa Tours",
@@ -132,6 +133,7 @@ const itinerarySiginjai: ItineraryDay[] = [
 
 export default async function Page() {
   const hotels = await getHotelData("3h2m");
+  const { reviews, averageRating, reviewCount } = await getReviews();
   const PACKAGE_NAME = "Paket Wisata Karimunjawa 3H2M (Hotel)";
   const allSigPrices = Object.values(hotels).flat().map((r) => r.sig);
   const allExpPrices = Object.values(hotels).flat().map((r) => r.exp);
@@ -146,6 +148,18 @@ export default async function Page() {
     description: metadata.description,
     image: "https://karimunjawa.tours/images/3h2mhotel.jpg",    
     brand: { "@type": "Brand", name: "Karimunjawa Tours" },
+    aggregateRating: reviewCount > 0 ? {
+      "@type": "AggregateRating",
+      ratingValue: averageRating,
+      reviewCount: reviewCount,
+    } : undefined,
+    review: reviews.slice(0, 5).map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.authorName },
+      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+      reviewBody: r.text,
+      datePublished: r.publishedAt,
+    })),
     offers: {
       "@type": "AggregateOffer",
       url: "https://karimunjawa.tours/paket/3h2m-hotel",

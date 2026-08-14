@@ -3,11 +3,8 @@ import PackageGrid from "../components/PackageGrid";
 import ActivityGrid from "../components/ActivityGrid";
 import Reviews from "../components/Reviews";
 import CTASection from "../components/CTASection";
-import { getReviews } from "../lib/reviews";
 
 export default async function Home() {
-  const { reviews, averageRating, reviewCount } = await getReviews();
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
@@ -22,18 +19,6 @@ export default async function Home() {
       addressRegion: "Jawa Tengah",
       addressCountry: "ID",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: averageRating,
-      reviewCount: reviewCount,
-    },
-    review: reviews.slice(0, 10).map((r) => ({
-      "@type": "Review",
-      author: { "@type": "Person", name: r.authorName },
-      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
-      reviewBody: r.text,
-      datePublished: r.publishedAt,
-    })),
   };
 
   return (
