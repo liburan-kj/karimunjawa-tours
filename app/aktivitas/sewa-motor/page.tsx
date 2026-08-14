@@ -1,5 +1,5 @@
 import CTASection from "../../../components/CTASection";
-import Link from "next/link";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export const metadata = {
   title: "Sewa Motor Karimunjawa - Karimunjawa Tours",
@@ -47,9 +47,13 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <p style={{ fontSize: 13, marginTop: 20 }}>
-        <Link href="/" style={{ color: "#0a5c8a" }}>Beranda</Link> / <Link href="/#aktivitas" style={{ color: "#0a5c8a" }}>Aktivitas</Link> / Sewa Motor
-      </p>
+      <Breadcrumb
+        items={[
+          { label: "Beranda", href: "/" },
+          { label: "Aktivitas", href: "/#aktivitas" },
+          { label: "Sewa Motor" },
+        ]}
+      />
 
       <div className="pkg-hero">
         <div className="pkg-hero-label">🛵 AKTIVITAS KARIMUNJAWA</div>

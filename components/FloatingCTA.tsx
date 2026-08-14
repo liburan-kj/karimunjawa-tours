@@ -13,11 +13,11 @@ export default function FloatingCTA({
 
   useEffect(() => {
     const handler = () => {
-      const startSection = document.getElementById("hotel-section");
-      if (!startSection) return;
-      const startPos = startSection.getBoundingClientRect().top;
       const windowHeight = window.innerHeight;
-      const isPastStart = startPos <= windowHeight * 0.8;
+      const startSection = document.getElementById("hotel-section");
+      const isPastStart = startSection
+        ? startSection.getBoundingClientRect().top <= windowHeight * 0.8
+        : window.scrollY >= Math.max(windowHeight * 0.35, 260);
 
       const footer = document.querySelector(".site-footer");
       let isAtFooter = false;
@@ -26,6 +26,8 @@ export default function FloatingCTA({
       }
       setShow(isPastStart && !isAtFooter);
     };
+
+    handler();
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);

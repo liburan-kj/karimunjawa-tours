@@ -1,6 +1,6 @@
 import Itinerary from "../../../components/Itinerary";
 import FloatingCTA from "../../../components/FloatingCTA";
-import Link from "next/link";
+import Breadcrumb from "../../../components/Breadcrumb";
 import type { ItineraryDay } from "../../../components/Itinerary";
 
 export const metadata = {
@@ -68,9 +68,13 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <p style={{ fontSize: 13, marginTop: 20 }}>
-        <Link href="/" style={{ color: "#0a5c8a" }}>Beranda</Link> / <Link href="/#aktivitas" style={{ color: "#0a5c8a" }}>Aktivitas</Link> / Diving Trip
-      </p>
+      <Breadcrumb
+        items={[
+          { label: "Beranda", href: "/" },
+          { label: "Aktivitas", href: "/#aktivitas" },
+          { label: "Diving Trip" },
+        ]}
+      />
 
       <div className="pkg-hero">
         <div className="pkg-hero-label">🤿 AKTIVITAS KARIMUNJAWA</div>

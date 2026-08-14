@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Breadcrumb from "../../../components/Breadcrumb";
 import { getHomestayData } from "../../../lib/homestayData";
 import HomestayPackageTabs from "../../../components/HomestayPackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
@@ -134,6 +135,14 @@ export default async function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <Breadcrumb
+        items={[
+          { label: "Beranda", href: "/" },
+          { label: "Paket Wisata", href: "/#paket-wisata" },
+          { label: "2 Hari 1 Malam - Homestay" },
+        ]}
       />
 
       <div className="pkg-hero">
