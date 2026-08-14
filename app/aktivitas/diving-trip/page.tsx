@@ -1,10 +1,24 @@
 import Itinerary from "../../../components/Itinerary";
 import FloatingCTA from "../../../components/FloatingCTA";
+import Link from "next/link";
 import type { ItineraryDay } from "../../../components/Itinerary";
 
 export const metadata = {
   title: "Diving Trip Karimunjawa - Karimunjawa Tours",
   description: "Diving trip 2x dive di spot berbeda untuk pemilik lisensi scuba diving. Termasuk kapal, alat dive, dan pemandu selam.",
+  alternates: { canonical: "https://karimunjawa.tours/aktivitas/diving-trip" },
+  openGraph: {
+    title: "Diving Trip Karimunjawa",
+    description: "Diving trip 2x dive di spot berbeda untuk pemilik lisensi scuba diving.",
+    url: "https://karimunjawa.tours/aktivitas/diving-trip",
+    images: ["https://karimunjawa.tours/images/scuba-diving.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Diving Trip Karimunjawa",
+    description: "Diving trip 2x dive di spot berbeda untuk pemilik lisensi scuba diving.",
+    images: ["https://karimunjawa.tours/images/scuba-diving.jpg"],
+  },
 };
 
 const PACKAGE_NAME = "Diving Trip Karimunjawa";
@@ -54,11 +68,21 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      <p style={{ fontSize: 13, marginTop: 20 }}>
+        <Link href="/" style={{ color: "#0a5c8a" }}>Beranda</Link> / <Link href="/#aktivitas" style={{ color: "#0a5c8a" }}>Aktivitas</Link> / Diving Trip
+      </p>
+
       <div className="pkg-hero">
         <div className="pkg-hero-label">🤿 AKTIVITAS KARIMUNJAWA</div>
         <h1>Diving Trip Karimunjawa</h1>
         <p>2x dive di spot berbeda, khusus untuk pemilik lisensi scuba diving.</p>
       </div>
+
+      <img
+        src="/images/scuba-diving.jpg"
+        alt="Diving Trip Karimunjawa - penyelam di perairan Karimunjawa"
+        style={{ width: "100%", borderRadius: 14, marginBottom: 24 }}
+      />
 
       <div className="pkg-desc">
         <p>

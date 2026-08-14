@@ -1,10 +1,24 @@
 import Itinerary from "../../../components/Itinerary";
 import FloatingCTA from "../../../components/FloatingCTA";
+import Link from "next/link";
 import type { ItineraryDay } from "../../../components/Itinerary";
 
 export const metadata = {
   title: "One Day Trip Karimunjawa - Karimunjawa Tours",
   description: "Tur laut sehari penuh di Karimunjawa: island hopping, snorkeling, dan makan siang BBQ ikan. Cocok buat yang sudah punya tiket kapal & penginapan sendiri.",
+  alternates: { canonical: "https://karimunjawa.tours/aktivitas/one-day-trip" },
+  openGraph: {
+    title: "One Day Trip Karimunjawa",
+    description: "Tur laut sehari penuh di Karimunjawa: island hopping, snorkeling, dan makan siang BBQ ikan.",
+    url: "https://karimunjawa.tours/aktivitas/one-day-trip",
+    images: ["https://karimunjawa.tours/images/island-hopping.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "One Day Trip Karimunjawa",
+    description: "Tur laut sehari penuh di Karimunjawa: island hopping, snorkeling, dan makan siang BBQ ikan.",
+    images: ["https://karimunjawa.tours/images/island-hopping.png"],
+  },
 };
 
 const PACKAGE_NAME = "One Day Trip Karimunjawa";
@@ -58,11 +72,21 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      <p style={{ fontSize: 13, marginTop: 20 }}>
+        <Link href="/" style={{ color: "#0a5c8a" }}>Beranda</Link> / <Link href="/#aktivitas" style={{ color: "#0a5c8a" }}>Aktivitas</Link> / One Day Trip
+      </p>
+
       <div className="pkg-hero">
         <div className="pkg-hero-label">🏝️ AKTIVITAS KARIMUNJAWA</div>
         <h1>One Day Trip Karimunjawa</h1>
         <p>Tur laut sehari penuh buat kamu yang sudah punya tiket penyeberangan dan penginapan sendiri.</p>
       </div>
+
+      <img
+        src="/images/island-hopping.png"
+        alt="One Day Trip Karimunjawa - snorkeling dan island hopping bersama peserta"
+        style={{ width: "100%", borderRadius: 14, marginBottom: 24 }}
+      />
 
       <div className="pkg-desc">
         <p>
