@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { HotelsData } from "../lib/hotelData";
+import type { PropertyData } from "../lib/hotelData";
 import HotelPricingTable from "./HotelPricingTable";
 import Itinerary, { ItineraryDay } from "./Itinerary";
 
@@ -12,7 +12,7 @@ export default function PackageTabs({
   itinerarySiginjai,
   facilities: customFacilities,
 }: {
-  hotels: HotelsData;
+  hotels: PropertyData;
   packageName: string;
   itineraryExpress: ItineraryDay[];
   itinerarySiginjai: ItineraryDay[];

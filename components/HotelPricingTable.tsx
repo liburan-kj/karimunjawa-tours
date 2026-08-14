@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { HotelsData, Room } from "../lib/hotelData";
+import type { PropertyData, Room } from "../lib/hotelData";
 import { TARGET_HOTELS } from "../lib/hotelData";
 
 function toTitleCase(s: string) {
@@ -15,7 +15,7 @@ export default function HotelPricingTable({
   priceKey,
   packageName,
 }: {
-  hotels: HotelsData;
+  hotels: PropertyData;
   priceKey: "sig" | "exp";
   packageName: string;
 }) {
@@ -72,7 +72,7 @@ export default function HotelPricingTable({
                     </tr>
                   </thead>
                   <tbody>
-                    {rooms.map((rm, idx) => {
+                    {rooms.map((rm: Room, idx: number) => {
                       const price = priceKey === "sig" ? rm.sig : rm.exp;
                       return (
                         <tr key={idx}>
