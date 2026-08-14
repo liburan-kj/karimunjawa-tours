@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
 import PackageGrid from "../components/PackageGrid";
+import ActivityGrid from "../components/ActivityGrid";
 import Reviews from "../components/Reviews";
 import CTASection from "../components/CTASection";
 import { getReviews } from "../lib/reviews";
@@ -43,6 +44,7 @@ export default async function Home() {
       />
       <Hero />
       <PackageGrid />
+      <ActivityGrid />
       <Reviews />
       <CTASection />
     </>
