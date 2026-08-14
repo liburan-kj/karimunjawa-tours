@@ -9,8 +9,6 @@ export const metadata = {
   description: "Paket wisata 4 hari 3 malam ke Karimunjawa dengan akomodasi hotel, termasuk island hopping, snorkeling, dan transportasi kapal.",
 };
 
-const hotels = await getHotelData("4h3m"); // sesuaikan "3h2m"/"4h3m" per halaman
-
 const itineraryExpress: ItineraryDay[] = [
   {
     label: "🌅 HARI PERTAMA",

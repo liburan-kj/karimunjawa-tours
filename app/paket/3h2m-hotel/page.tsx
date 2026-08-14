@@ -8,8 +8,6 @@ export const metadata = {
   description: "Paket wisata 3 hari 2 malam ke Karimunjawa dengan akomodasi hotel, termasuk island hopping, snorkeling, dan transportasi kapal.",
 };
 
-const hotels = await getHotelData("3h2m"); // sesuaikan "3h2m"/"4h3m" per halaman
-
 const itineraryExpress: ItineraryDay[] = [
   {
     label: "🌅 HARI PERTAMA",
@@ -133,7 +131,7 @@ const itinerarySiginjai: ItineraryDay[] = [
 ];
 
 export default async function Page() {
-  const hotels = await getHotelData("2h1m");
+  const hotels = await getHotelData("3h2m");
   const PACKAGE_NAME = "Paket Wisata Karimunjawa 3H2M (Hotel)";
   const allSigPrices = Object.values(hotels).flat().map((r) => r.sig);
   const allExpPrices = Object.values(hotels).flat().map((r) => r.exp);
