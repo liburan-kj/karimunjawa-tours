@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllArticles } from "../lib/blogger";
+import { ARTICLES_PER_PAGE, getAllArticles, getArticlePageCount } from "../lib/blogger";
 
 const BASE_URL = "https://karimunjawa.tours";
 
@@ -22,6 +22,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   let articlePages: MetadataRoute.Sitemap = [];
+  let archivePages: MetadataRoute.Sitemap = [];
+
   try {
     const articles = await getAllArticles();
     articlePages = articles.map((a) => ({
@@ -30,9 +32,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.6,
     }));
+
+    const totalPages = await getArticlePageCount(ARTICLES_PER_PAGE);
+    archivePages = Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => ({
+      url: `${BASE_URL}/artikel/page/${index + 2}`,
+      changeFrequency: "weekly",
+      priority: 0.5,
+    }));
   } catch {
     // kalau fetch Blogger gagal, sitemap tetap jalan tanpa artikel
   }
 
-  return [...staticPages, ...articlePages];
+  return [...staticPages, ...articlePages, ...archivePages];
 }

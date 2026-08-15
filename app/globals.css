@@ -331,6 +331,35 @@ a { text-decoration: none; color: var(--ocean-blue); transition: all 0.3s ease; 
 .article-body a { color: #0a5c8a; text-decoration: underline; }
 .article-body ul, .article-body ol { margin: 0 0 16px 20px; }
 
+.article-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; }
+.article-pagination-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.article-pagination-link,
+.article-pagination-page {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid #dbe7f0;
+  background: #fff;
+  color: var(--ocean-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.article-pagination-link:hover,
+.article-pagination-page:hover { border-color: var(--ocean-blue); color: var(--ocean-blue); transform: translateY(-1px); }
+.article-pagination-page.is-active { background: linear-gradient(135deg, #0a5c8a, #1c8fc7); border-color: transparent; color: #fff; }
+.article-pagination-link-disabled { opacity: 0.45; cursor: default; pointer-events: none; }
+
+@media (max-width: 600px) {
+  .article-pagination { gap: 8px; }
+  .article-pagination-link,
+  .article-pagination-page { min-width: 40px; height: 40px; padding: 0 12px; font-size: 12px; }
+}
+
 /* GOOGLE REVIEWS - TINGGI CARD TETAP (FIXED) */
 .carousel__card,
 .css-b1vrbs {
@@ -343,7 +372,8 @@ a { text-decoration: none; color: var(--ocean-blue); transition: all 0.3s ease; 
 .activity-grid-section { max-width: 1080px; margin: 60px auto 30px; padding: 0 20px; }
 .activity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 @media (max-width: 768px) {
-  .activity-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .activity-grid { grid-template-columns: 1fr; justify-items: center; }
+  .activity-card { width: 90%; }
 }
 
 .activity-card { background: var(--white); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; border: 1px solid #f0f0f0; text-align: left; }
