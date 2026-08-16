@@ -5,6 +5,7 @@ type Activity = {
   title: string;
   desc: string;
   img: string;
+  priceLabel: string;
 };
 
 const activities: Activity[] = [
@@ -13,18 +14,21 @@ const activities: Activity[] = [
     title: "One Day Trip",
     desc: "Jelajahi pulau-pulau kecil di sekitar Karimunjawa dengan kapal, mampir ke spot snorkeling dan pantai-pantai tersembunyi.",
     img: "/images/island-hopping.png",
+    priceLabel: "Mulai 180K",
   },
   {
     slug: "diving-trip",
     title: "Diving Trip",
     desc: "Trip menyelam ke spot-spot terbaik Karimunjawa, cocok untuk pemula maupun diver berpengalaman.",
     img: "/images/scuba-diving.jpg",
+    priceLabel: "Mulai 1.100K",
   },
   {
     slug: "sewa-motor",
     title: "Sewa Motor",
     desc: "Sewa motor harian buat eksplorasi Karimunjawa dengan bebas sesuai jadwalmu sendiri.",
     img: "/images/sewa-motor.jpg",
+    priceLabel: "Mulai 75K",
   },
 ];
 
@@ -40,6 +44,9 @@ export default function ActivityGrid() {
           <div className="activity-card" key={act.slug}>
             <Link className="activity-card-image-wrap" href={`/aktivitas/${act.slug}`}>
               <img className="activity-card-img" loading="lazy" alt={act.title} src={act.img} />
+              <div className="page-card-badge">
+                <span className="badge-text">{act.priceLabel}</span>
+              </div>
             </Link>
             <div className="activity-card-body">
               <span className="activity-card-category">AKTIVITAS</span>

@@ -41,6 +41,7 @@ export default function HomestayPackageTabs({
   const facilities = customFacilities || defaultFacilities;
 
   const excluded = [
+    "Tiket BTN Karimunjawa",
     "Obat-obatan pribadi",
     "Tiket penangkaran hiu (Rp 30.000)",
     "Belanja pribadi",
