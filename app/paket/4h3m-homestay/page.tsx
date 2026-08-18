@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { getHomestayData } from "../../../lib/homestayData";
+import { getPackagePricing } from "../../../lib/packagePricing";
 import HomestayPackageTabs from "../../../components/HomestayPackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
 import type { ItineraryDay } from "../../../components/Itinerary";
@@ -190,13 +191,7 @@ export default async function Page() {
   const groups = await getHomestayData("4h3m");
   const { reviews, averageRating, reviewCount } = await getReviews();
 
-  const allItems = groups.flatMap((g) => g.items);
-  const allSigPrices = allItems.map((r) => r.sig);
-  const allExpPrices = allItems.map((r) => r.exp);
-
-  const lowPrice = allSigPrices.length ? Math.min(...allSigPrices) * 1000 : 1180000;
-  const highPrice = allExpPrices.length ? Math.max(...allExpPrices) * 1000 : 2040000;
-  const offerCount = allItems.length;
+  const { lowPrice, highPrice, offerCount } = await getPackagePricing("4h3m-homestay");
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -1,5 +1,6 @@
 import Breadcrumb from "../../../components/Breadcrumb";
 import { getHotelData } from "../../../lib/hotelData";
+import { getPackagePricing } from "../../../lib/packagePricing";
 import PackageTabs from "../../../components/PackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
 import type { ItineraryDay } from "../../../components/Itinerary";
@@ -88,11 +89,7 @@ export default async function Page() {
   const hotels = await getHotelData("2h1m");
   const { reviews, averageRating, reviewCount } = await getReviews();
 
-  // Hitung lowPrice dari semua harga express yang ada (buat floating CTA)
-  const allExpressPrices = Object.values(hotels).flat().map((r) => r.exp);
-  const lowPrice = allExpressPrices.length ? Math.min(...allExpressPrices) * 1000 : 1280000;
-  const highPrice = allExpressPrices.length ? Math.max(...Object.values(hotels).flat().map((r) => r.sig)) * 1000 : 3010000;
-  const offerCount = Object.values(hotels).flat().length;
+  const { lowPrice, highPrice, offerCount } = await getPackagePricing("2h1m-hotel");
 
   const jsonLd = {
     "@context": "https://schema.org",

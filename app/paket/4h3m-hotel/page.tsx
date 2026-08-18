@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { getHotelData } from "../../../lib/hotelData";
+import { getPackagePricing } from "../../../lib/packagePricing";
 import PackageTabs from "../../../components/PackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
 import type { ItineraryDay } from "../../../components/Itinerary";
@@ -187,11 +188,7 @@ export default async function Page() {
   const hotels = await getHotelData("4h3m");
   const { reviews, averageRating, reviewCount } = await getReviews();
   const PACKAGE_NAME = "Paket Wisata Karimunjawa 4H3M (Hotel)";
-  const allSigPrices = Object.values(hotels).flat().map((r) => r.sig);
-  const allExpPrices = Object.values(hotels).flat().map((r) => r.exp);
-  const lowPrice = allSigPrices.length ? Math.min(...allSigPrices) * 1000 : 2270000;
-  const highPrice = allExpPrices.length ? Math.max(...allExpPrices) * 1000 : 7010000;
-  const offerCount = Object.values(hotels).flat().length;
+  const { lowPrice, highPrice, offerCount } = await getPackagePricing("4h3m-hotel");
 
   const jsonLd = {
     "@context": "https://schema.org",
