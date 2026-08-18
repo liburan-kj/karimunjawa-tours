@@ -14,7 +14,7 @@ const activities: Activity[] = [
     title: "One Day Trip",
     desc: "Jelajahi pulau-pulau kecil di sekitar Karimunjawa dengan kapal, mampir ke spot snorkeling dan pantai-pantai tersembunyi.",
     img: "/images/island-hopping.png",
-    priceLabel: "Mulai 180K",
+    priceLabel: "Mulai 200K",
   },
   {
     slug: "diving-trip",

@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 const PACKAGE_NAME = "One Day Trip Karimunjawa";
-const PRICE = 180000;
+const PRICE = 200000;
 
 const itinerary: ItineraryDay[] = [
   {
