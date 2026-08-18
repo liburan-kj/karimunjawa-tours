@@ -233,7 +233,7 @@ export default async function Page() {
           ["🛡️", "Asuransi perjalanan kapal"],
           ["🚐", "Transportasi check in–check out"],
           ["🏨", "Penginapan di Karimunjawa"],
-          ["🍽️", "Makan 4x (incl. 1x BBQ ikan di pulau)"],
+          ["🍽️", "Makan 5x (incl. 1x BBQ ikan di pulau)"],
           ["🗺️", "Tour darat 1x"],
           ["⛵", "Tour laut full day 1x"],
           ["🏝️", "Retribusi Pelabuhan Wisata Karimunjawa"],

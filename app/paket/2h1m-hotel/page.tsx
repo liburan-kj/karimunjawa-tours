@@ -154,6 +154,22 @@ export default async function Page() {
         packageName={PACKAGE_NAME}
         itineraryExpress={itineraryExpress}
         itinerarySiginjai={itinerarySiginjai}
+        facilities={[
+          ["⚓", "Retribusi Penumpang Pelabuhan Jepara"],
+          ["🚢", "Tiket kapal Jepara–Karimunjawa (PP)"],
+          ["🛡️", "Asuransi perjalanan kapal"],
+          ["🚐", "Transportasi check in–check out"],
+          ["🏨", "Penginapan di Karimunjawa"],
+          ["🍽️", "Makan 3x"],
+          ["⛵", "Tour laut half day 1x"],
+          ["🏝️", "Retribusi Pelabuhan Wisata Karimunjawa"],
+          ["🚤", "Sewa kapal tour laut & crew"],
+          ["🎓", "Jasa Tour Guide HPI"],
+          ["🤿", "Sewa alat snorkeling, pelampung, fin"],
+          ["⚓", "Biaya sandar kapal"],
+          ["💧", "Air mineral saat tour laut"],
+          ["📸", "Dokumentasi (termasuk bawah air)"],
+        ]}
       />
 
       <FloatingCTA lowPrice={lowPrice} packageName={PACKAGE_NAME} />
