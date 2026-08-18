@@ -61,11 +61,13 @@ async function getHotelPricing(
   const filteredRooms = rooms.filter((room) => !isExtraBedRoom(room.room));
   const lowPrices = filteredRooms.map((room) => room[lowKey]);
   const highPrices = filteredRooms.map((room) => room[highKey]);
+  // Each room has 2 ferry options (Siginjai + Express)
+  const offerCount = filteredRooms.length * 2;
 
   return {
     lowPrice: summarizePrices(lowPrices, FALLBACK_LOW_PRICE[slug], "min"),
     highPrice: summarizePrices(highPrices, FALLBACK_HIGH_PRICE[slug], "max"),
-    offerCount: rooms.length,
+    offerCount,
   };
 }
 
@@ -81,11 +83,13 @@ async function getHomestayPricing(
   const filteredItems = items.filter((item) => !isExtraBedRoom(item.roomName));
   const lowPrices = filteredItems.map((item) => item[lowKey]);
   const highPrices = filteredItems.map((item) => item[highKey]);
+  // Each room has 2 ferry options (Siginjai + Express)
+  const offerCount = filteredItems.length * 2;
 
   return {
     lowPrice: summarizePrices(lowPrices, FALLBACK_LOW_PRICE[slug], "min"),
     highPrice: summarizePrices(highPrices, FALLBACK_HIGH_PRICE[slug], "max"),
-    offerCount: items.length,
+    offerCount,
   };
 }
 
