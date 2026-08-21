@@ -56,7 +56,7 @@ export default function WhyTravelWithUs() {
 
       <div className="why-grid">
         <div className="why-media">
-          <img src="/images/stand.jpg" alt="Suasana pantai Karimunjawa" />
+          <img src="/images/stand.JPG" alt="Suasana pantai Karimunjawa" />
         </div>
 
         <div className="why-list">
