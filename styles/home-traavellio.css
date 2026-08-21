@@ -1,0 +1,613 @@
+/* ============================================================
+   HOME — TRAAVELLIO STYLE
+   Semua rule di bawah discope dalam .home-traavellio supaya
+   tidak menimpa style classname yang sama di halaman lain
+   (misal /paket/[slug], /aktivitas/[slug]).
+   ============================================================ */
+
+.home-traavellio {
+  --tr-bg: #ffffff;
+  --tr-bg-alt: #f6f4ef;
+  --tr-ink: #14211e;
+  --tr-muted: #5c6b67;
+  --tr-accent: #0e8c86;
+  --tr-accent-dark: #0b6f6a;
+  --tr-border: #e7e3da;
+  --tr-radius-lg: 28px;
+  --tr-radius-md: 18px;
+  --tr-maxw: 1240px;
+  color: var(--tr-ink);
+  background: var(--tr-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.home-traavellio * {
+  box-sizing: border-box;
+}
+
+.home-traavellio img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- shared: eyebrow + section head ---------- */
+
+.tr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tr-accent);
+  margin-bottom: 14px;
+}
+
+.tr-eyebrow svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.tr-section {
+  max-width: var(--tr-maxw);
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.tr-section--alt {
+  background: var(--tr-bg-alt);
+  max-width: none;
+}
+
+.tr-section--alt > .tr-section-inner {
+  max-width: var(--tr-maxw);
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.tr-section-head {
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.tr-section-head h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.tr-section-head p {
+  margin-top: 14px;
+  color: var(--tr-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.tr-hero {
+  position: relative;
+  height: min(88vh, 780px);
+  min-height: 520px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.tr-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tr-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 20, 18, 0.15) 0%,
+    rgba(10, 20, 18, 0.05) 35%,
+    rgba(10, 20, 18, 0.75) 100%
+  );
+}
+
+.tr-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--tr-maxw);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px 56px;
+  color: #fff;
+}
+
+.tr-hero-title {
+  font-size: clamp(34px, 5.5vw, 64px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  max-width: 780px;
+  margin: 0 0 18px;
+}
+
+.tr-hero-desc {
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.6;
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 32px;
+}
+
+.tr-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--tr-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.tr-hero-cta:hover {
+  background: var(--tr-accent-dark);
+  transform: translateY(-1px);
+}
+
+.tr-hero-trust {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--tr-radius-md);
+  padding: 16px 24px;
+  color: #fff;
+}
+
+.tr-hero-trust-item {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.tr-hero-trust-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.tr-hero-trust-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tr-hero-trust-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 640px) {
+  .tr-hero {
+    align-items: stretch;
+  }
+  .tr-hero-content {
+    padding-bottom: 24px;
+  }
+  .tr-hero-trust {
+    position: static;
+    margin: 20px 24px 32px;
+    justify-content: space-around;
+  }
+}
+
+/* ============================================================
+   WHY TRAVEL WITH US
+   ============================================================ */
+
+.tr-why {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.tr-why-media {
+  position: relative;
+  border-radius: var(--tr-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.tr-why-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tr-why-list {
+  display: grid;
+  gap: 28px;
+}
+
+.tr-why-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.tr-why-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--tr-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tr-accent);
+}
+
+.tr-why-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tr-why-item h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.tr-why-item p {
+  font-size: 14.5px;
+  color: var(--tr-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .tr-why {
+    grid-template-columns: 1fr;
+  }
+  .tr-why-media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ============================================================
+   EXPLORE BY EXPERIENCE (ActivityGrid restyle)
+   ============================================================ */
+
+.home-traavellio .activity-grid-section {
+  max-width: var(--tr-maxw);
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.home-traavellio .activity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 0;
+}
+
+.tr-explore-card {
+  position: relative;
+  display: block;
+  border-radius: var(--tr-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  text-decoration: none;
+  color: #fff;
+}
+
+.tr-explore-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.tr-explore-card:hover .tr-explore-img {
+  transform: scale(1.06);
+}
+
+.tr-explore-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(10, 20, 18, 0.85) 100%
+  );
+}
+
+.tr-explore-price {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--tr-ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.tr-explore-eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.75);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.tr-explore-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.tr-explore-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .home-traavellio .activity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   HANDCRAFTED TOUR PACKAGES (PackageGrid restyle, scoped)
+   ============================================================ */
+
+.home-traavellio .pages-grid-section {
+  max-width: var(--tr-maxw);
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.home-traavellio .pages-grid-section {
+  text-align: center;
+}
+
+.home-traavellio .pages-grid-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  max-width: 620px;
+  margin: 0 auto 48px;
+  display: block;
+  line-height: 1.2;
+}
+
+.home-traavellio .pages-grid-subtitle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--tr-muted);
+  margin-bottom: 14px;
+}
+
+.home-traavellio .pages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  text-align: left;
+}
+
+.home-traavellio .page-card {
+  background: transparent;
+}
+
+.home-traavellio .page-card-image-wrap {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--tr-radius-lg);
+  overflow: hidden;
+}
+
+.home-traavellio .page-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.home-traavellio .page-card:hover .page-card-img {
+  transform: scale(1.05);
+}
+
+.home-traavellio .page-card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(20, 33, 30, 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.home-traavellio .page-card-badge .badge-text {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.home-traavellio .page-card-body {
+  padding: 18px 4px 0;
+}
+
+.home-traavellio .page-card-category {
+  display: none;
+}
+
+.home-traavellio .page-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.home-traavellio .page-card-title a {
+  color: var(--tr-ink);
+  text-decoration: none;
+}
+
+.home-traavellio .page-card-desc {
+  display: none;
+}
+
+.home-traavellio .page-card-footer {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.home-traavellio .page-card-meta {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tr-ink);
+}
+
+.home-traavellio .page-card-link {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .home-traavellio .pages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-traavellio .pages-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   TESTIMONIALS (Reviews wrapper)
+   ============================================================ */
+
+.tr-reviews-head {
+  max-width: var(--tr-maxw);
+  margin: 0 auto;
+  padding: 96px 24px 0;
+}
+
+/* ============================================================
+   CTA BANNER (CTASection restyle)
+   ============================================================ */
+
+.tr-cta-banner {
+  position: relative;
+  max-width: var(--tr-maxw);
+  margin: 96px auto;
+  border-radius: var(--tr-radius-lg);
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.tr-cta-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tr-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 20, 18, 0.6);
+}
+
+.tr-cta-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 560px;
+}
+
+.tr-cta-content h2 {
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.tr-cta-content p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 28px;
+}
+
+.tr-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--tr-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 32px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.tr-cta-btn:hover {
+  background: var(--tr-accent-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .tr-cta-banner {
+    margin: 64px 16px;
+    min-height: 280px;
+  }
+}

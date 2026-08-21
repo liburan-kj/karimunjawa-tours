@@ -1,4 +1,6 @@
+import "../styles/why-travel-with-us.css";
 import Hero from "../components/Hero";
+import WhyTravelWithUs from "../components/WhyTravelWithUs";
 import PackageGrid from "../components/PackageGrid";
 import ActivityGrid from "../components/ActivityGrid";
 import Reviews from "../components/Reviews";
@@ -30,6 +32,7 @@ export default async function Home() {
       <Hero />
       <PackageGrid />
       <ActivityGrid />
+      <WhyTravelWithUs />
       <Reviews />
       <CTASection />
     </>
