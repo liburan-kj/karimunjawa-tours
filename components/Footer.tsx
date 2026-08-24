@@ -5,9 +5,12 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-grid">
         <div className="footer-widget">
-          <h4>Karimunjawa Tours</h4>
-          <p>Mitra perjalanan terpercaya untuk menjelajahi keindahan bahari Kepulauan Karimunjawa. Pengalaman wisata aman, nyaman, dan berkesan.</p>
-        </div>
+  <h4>Karimunjawa Tours</h4>
+  <p>Mitra perjalanan terpercaya untuk menjelajahi keindahan bahari Kepulauan Karimunjawa. Pengalaman wisata aman, nyaman, dan berkesan.</p><br></br>
+  <ul>
+    <li><Link href="/privasi">Kebijakan Privasi</Link></li>
+  </ul>
+</div>
         <div className="footer-widget">
           <h4>Paket Favorit</h4>
           <ul>

@@ -33,7 +33,7 @@ export default function Header() {
               </>
             )}
 
-            <li><a href="https://wa.me/+6282225336306" target="_blank" rel="noopener">Kontak</a></li>
+            <li><Link href="/kontak">Kontak</Link></li>
           </ul>
         </nav>
       </div>
