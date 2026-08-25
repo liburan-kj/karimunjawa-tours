@@ -3,6 +3,10 @@ import Link from "next/link";
 export const metadata = {
   title: "404 - Halaman Tidak Ditemukan",
   description: "Halaman yang Anda cari tidak ditemukan.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function NotFound() {
@@ -24,18 +28,23 @@ export default function NotFound() {
             utama dan lanjutkan rencana liburan Anda.
           </p>
           <div className="not-found-actions">
-            <Link href="/" className="btn-cta">
-              Kembali ke Beranda
-            </Link>
-            <a
-              href="https://wa.me/6282225336306"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="not-found-link"
-            >
-              Hubungi Kami
-            </a>
-          </div>
+  <Link href="/" className="btn-cta">
+    Kembali ke Beranda
+  </Link>
+  <Link href="/kontak" className="not-found-link">
+    Hubungi Kami
+  </Link>
+</div>
+
+<nav className="not-found-more-links" aria-label="Halaman lainnya">
+  <Link href="/#paket-wisata">Paket Wisata</Link>
+  <span aria-hidden="true"> · </span>
+  <Link href="/aktivitas">Aktivitas</Link>
+  <span aria-hidden="true"> · </span>
+  <Link href="/tentang-kami">Tentang Kami</Link>
+  <span aria-hidden="true"> · </span>
+  <Link href="/faq">FAQ</Link>
+</nav>
         </div>
 
         <svg
