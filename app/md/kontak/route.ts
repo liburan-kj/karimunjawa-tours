@@ -1,23 +1,33 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const markdown = `# Karimunjawa Tours
+  const markdown = `# Kontak & Layanan Pelanggan — Karimunjawa Tours
 
-Agen wisata lokal di Karimunjawa, Jepara, sejak 2015. Menyediakan paket tour pulau lengkap: transportasi, akomodasi, dan aktivitas snorkeling.
+Tim layanan pelanggan dan reservasi kami siap membantu perencanaan liburan Anda ke Kepulauan Karimunjawa setiap hari.
 
-## Paket Wisata
-- 2H1M (2 Hari 1 Malam) — Hotel & Homestay
-- 3H2M (3 Hari 2 Malam) — Hotel & Homestay
-- 4H3M (4 Hari 3 Malam) — Hotel & Homestay
+---
 
-## Keberangkatan
-Seluruh paket berangkat dari Pelabuhan Kartini, Jepara, via KMP Siginjai (±5.5 jam) atau Express Bahari (±2–3 jam).
+## Kontak Resmi
+- **WhatsApp Reservasi & Konsultasi**: [+62 822-2533-6306](https://wa.me/6282225336306)
+- **Email Resmi**: liburan@karimunjawa.tours
+- **Website**: https://karimunjawa.tours
+- **Instagram**: [@karimunjawa.tours](https://www.instagram.com/karimunjawa.tours)
+- **Google Maps**: [Karimunjawa Tours](https://maps.app.goo.gl/Gou7H9Ls6hAWSPpx5)
 
-## Kontak
-- WhatsApp: +62 822-2533-6306
-- Email: liburan@karimunjawa.tours
+---
 
-Lihat detail lengkap di https://karimunjawa.tours
+## Alamat Operasional
+- **Lokasi**: Karimunjawa, Kabupaten Jepara, Jawa Tengah 59455, Indonesia
+- **Pelabuhan Keberangkatan**: Pelabuhan Kartini, Jepara, Jawa Tengah
+
+---
+
+## Informasi Pembayaran Resmi
+- **Bank**: BCA (Bank Central Asia)
+- **Nomor Rekening**: 0095341611
+- **Atas Nama**: Fransisca Frisca Yuwanita
+
+*Catatan Keamanan: Pastikan pembayaran DP hanya ditransfer ke rekening resmi BCA di atas. Kami tidak bertanggung jawab atas pembayaran ke rekening selain atas nama tersebut.*
 `;
 
   return new NextResponse(markdown, {
