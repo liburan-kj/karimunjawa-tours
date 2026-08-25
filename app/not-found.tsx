@@ -44,6 +44,10 @@ export default function NotFound() {
   <Link href="/tentang-kami">Tentang Kami</Link>
   <span aria-hidden="true"> · </span>
   <Link href="/faq">FAQ</Link>
+  <span aria-hidden="true"> · </span>
+  <Link href="/sitemap.xml">Sitemap</Link>
+  <span aria-hidden="true"> · </span>
+  <Link href="/llms.txt">LLMs.txt</Link>
 </nav>
         </div>
 
