@@ -1,3 +1,5 @@
+import Breadcrumb from "../../components/Breadcrumb";
+
 export const metadata = {
   title: "FAQ - Pertanyaan yang Sering Ditanyakan | Karimunjawa Tours",
   description: "Semua yang perlu kamu tahu sebelum liburan ke Karimunjawa: cara ke Karimunjawa, booking, pembayaran, refund, dan lainnya.",
@@ -71,6 +73,15 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      <div style={{ margin: "0 auto", maxWidth: 860, padding: "0 20px" }}>
+        <Breadcrumb
+          items={[
+            { label: "Beranda", href: "/" },
+            { label: "FAQ" },
+          ]}
+        />
+      </div>
 
       <div className="kj-faq-header">
         <h1>Pertanyaan yang Sering Ditanyakan</h1>
