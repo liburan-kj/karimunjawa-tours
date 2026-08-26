@@ -225,6 +225,20 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
+      
+  <section style={{ maxWidth: 800, margin: "40px auto 0", padding: "0 20px", textAlign: "center" }}>
+  <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--text-light)" }}>
+    Karimunjawa Tours adalah agen wisata lokal yang telah melayani wisatawan
+    ke Kepulauan Karimunjawa sejak 2015. Kami menyediakan paket tour lengkap
+    mulai dari 2 hingga 4 hari, dengan pilihan akomodasi hotel maupun
+    homestay, snorkeling di spot-spot terbaik, dan penyeberangan langsung
+    dari Pelabuhan Kartini, Jepara. Setiap paket sudah termasuk transportasi
+    kapal, penginapan sesuai pilihan Anda, makan 3 kali sehari selama trip,
+    pemandu wisata lokal berlisensi, dan peralatan snorkeling lengkap —
+    sehingga Anda tinggal fokus menikmati liburan tanpa perlu memikirkan
+    detail logistik.
+  </p>
+</section>
       <PackageGrid />
       <ActivityGrid />
       <WhyTravelWithUs />
