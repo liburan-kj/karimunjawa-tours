@@ -1,4 +1,5 @@
 import Breadcrumb from "../../components/Breadcrumb";
+import { generateBreadcrumbSchema, generateOrganizationSchema } from "../../lib/jsonld";
 
 export const metadata = {
   title: "Tentang Kami - Karimunjawa Tours",
@@ -6,6 +7,13 @@ export const metadata = {
 };
 
 export default function TentangKamiPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Beranda", href: "/" },
+    { label: "Tentang Kami" },
+  ]);
+
+  const organizationSchema = generateOrganizationSchema();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -29,6 +37,14 @@ export default function TentangKamiPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       
       <div style={{ margin: "0 auto", maxWidth: 860, padding: "0 20px" }}>

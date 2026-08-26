@@ -1,4 +1,5 @@
 import Breadcrumb from "../../components/Breadcrumb";
+import { generateBreadcrumbSchema } from "../../lib/jsonld";
 
 export const metadata = {
   title: "FAQ - Pertanyaan yang Sering Ditanyakan | Karimunjawa Tours",
@@ -54,7 +55,12 @@ const faqs = [
 ];
 
 export default function FaqPage() {
-  const jsonLd = {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Beranda", href: "/" },
+    { label: "FAQ" },
+  ]);
+
+  const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((item) => ({
@@ -71,7 +77,11 @@ export default function FaqPage() {
     <div className="kj-faq-wrap">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div style={{ margin: "0 auto", maxWidth: 860, padding: "0 20px" }}>

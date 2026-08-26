@@ -1,5 +1,6 @@
 import Breadcrumb from "../../components/Breadcrumb";
 import { getInstagramFeed } from "../../lib/instagramFeed";
+import { generateBreadcrumbSchema } from "../../lib/jsonld";
 
 export const metadata = {
   title: "Galeri - Karimunjawa Tours",
@@ -14,8 +15,18 @@ function formatCount(n: number): string {
 export default async function GaleriPage() {
   const { profile, posts } = await getInstagramFeed();
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Beranda", href: "/" },
+    { label: "Galeri" },
+  ]);
+
   return (
     <div style={{ maxWidth: 860, margin: "40px auto", padding: "0 20px" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <Breadcrumb
         items={[
           { label: "Beranda", href: "/" },
