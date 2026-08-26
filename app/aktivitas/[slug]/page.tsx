@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 type Activity = {
   slug: string;
@@ -49,6 +50,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <div style={{ margin: "0 auto", maxWidth: 860, padding: "0 20px" }}>
+      <Breadcrumb
+        items={[
+          { label: "Beranda", href: "/" },
+          { label: "Aktivitas", href: "/#aktivitas" },
+          { label: activity.title },
+        ]}
+      />
+
       <div className="pkg-hero">
         <div className="pkg-hero-label">{activity.label}</div>
         <h1>{activity.title}</h1>

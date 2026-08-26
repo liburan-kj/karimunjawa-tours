@@ -1,3 +1,5 @@
+import Breadcrumb from "../../components/Breadcrumb";
+
 export const metadata = {
   title: "Tentang Kami - Karimunjawa Tours",
   description: "Karimunjawa Tours melayani wisatawan sejak 2015. Tim lokal berpengalaman siap membantu liburanmu ke Kepulauan Karimunjawa jadi lebih berkesan.",
@@ -28,6 +30,16 @@ export default function TentangKamiPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      
+      <div style={{ margin: "0 auto", maxWidth: 860, padding: "0 20px" }}>
+        <Breadcrumb
+          items={[
+            { label: "Beranda", href: "/" },
+            { label: "Tentang Kami" },
+          ]}
+        />
+      </div>
+    
     <div className="kjt-about-wrap">
       <div className="kjt-card">
         <div className="kjt-dot" style={{ width: 120, height: 120, background: "var(--sun)", top: -30, right: 60 }} />

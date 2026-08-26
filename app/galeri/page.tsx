@@ -1,3 +1,4 @@
+import Breadcrumb from "../../components/Breadcrumb";
 import { getInstagramFeed } from "../../lib/instagramFeed";
 
 export const metadata = {
@@ -15,6 +16,13 @@ export default async function GaleriPage() {
 
   return (
     <div style={{ maxWidth: 860, margin: "40px auto", padding: "0 20px" }}>
+      <Breadcrumb
+        items={[
+          { label: "Beranda", href: "/" },
+          { label: "Galeri" },
+        ]}
+      />
+
       {/* Profil Instagram */}
       <div className="ig-profile-card">
         <div className="ig-avatar-wrap">
