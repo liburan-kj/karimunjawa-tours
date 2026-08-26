@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Breadcrumb from "../../../components/Breadcrumb";
+import { generateBreadcrumbSchema } from "../../../lib/jsonld";
 
 type Activity = {
   slug: string;
@@ -48,8 +49,35 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const activity = activities[slug];
   if (!activity) notFound();
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Beranda", href: "/" },
+    { label: "Aktivitas", href: "/#aktivitas" },
+    { label: activity.title },
+  ]);
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: activity.title,
+    description: activity.desc,
+    provider: {
+      "@type": "Organization",
+      name: "Karimunjawa Tours",
+      url: "https://karimunjawa.tours",
+    },
+  };
+
   return (
     <div style={{ margin: "0 auto", maxWidth: 860, padding: "0 20px" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       <Breadcrumb
         items={[
           { label: "Beranda", href: "/" },

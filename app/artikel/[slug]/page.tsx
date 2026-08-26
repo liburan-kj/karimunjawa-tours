@@ -1,6 +1,7 @@
 import { getArticleBySlug, getAllArticles } from "../../../lib/blogger";
 import { notFound } from "next/navigation";
 import Breadcrumb from "../../../components/Breadcrumb";
+import { generateBreadcrumbSchema } from "../../../lib/jsonld";
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
@@ -35,8 +36,36 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Beranda", href: "/" },
+    { label: "Artikel", href: "/artikel" },
+    { label: article.title },
+  ]);
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    image: article.featuredImage,
+    datePublished: article.date,
+    author: {
+      "@type": "Organization",
+      name: "Karimunjawa Tours",
+    },
+  };
+
   return (
     <article style={{ maxWidth: 800, margin: "40px auto", padding: "0 20px" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       <Breadcrumb
         items={[
           { label: "Beranda", href: "/" },

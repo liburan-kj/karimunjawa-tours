@@ -5,6 +5,7 @@ import PackageTabs from "../../../components/PackageTabs";
 import FloatingCTA from "../../../components/FloatingCTA";
 import type { ItineraryDay } from "../../../components/Itinerary";
 import { getReviews } from "../../../lib/reviews";
+import { generateBreadcrumbSchema } from "../../../lib/jsonld";
 
 export const metadata = {
   title: "Paket Wisata Karimunjawa 3 Hari 2 Malam Hotel - Karimunjawa Tours",
@@ -139,6 +140,12 @@ export default async function Page() {
   const PACKAGE_NAME = "Paket Wisata Karimunjawa 3H2M (Hotel)";
   const { lowPrice, highPrice, offerCount } = await getPackagePricing("3h2m-hotel");
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Beranda", href: "/" },
+    { label: "Paket Wisata", href: "/#paket-wisata" },
+    { label: "3 Hari 2 Malam - Hotel" },
+  ]);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -175,6 +182,10 @@ export default async function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <Breadcrumb
