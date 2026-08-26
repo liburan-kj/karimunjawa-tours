@@ -1,5 +1,6 @@
 import { getArticleBySlug, getAllArticles } from "../../../lib/blogger";
 import { notFound } from "next/navigation";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
@@ -36,13 +37,17 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
 
   return (
     <article style={{ maxWidth: 800, margin: "40px auto", padding: "0 20px" }}>
-      
+      <Breadcrumb
+        items={[
+          { label: "Beranda", href: "/" },
+          { label: "Artikel", href: "/artikel" },
+          { label: article.title },
+        ]}
+      />
 
       <h1 style={{ color: "#023e8a", fontSize: 32, fontWeight: 700, marginBottom: 24, lineHeight: 1.3 }}>
         {article.title}
       </h1>
-
-      
 
       <div className="article-body" dangerouslySetInnerHTML={{ __html: article.content }} />
     </article>
