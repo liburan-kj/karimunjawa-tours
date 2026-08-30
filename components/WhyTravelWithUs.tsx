@@ -55,21 +55,13 @@ export default function WhyTravelWithUs() {
       <h2 className="why-heading">Liburan Tenang, Kami yang Urus Detailnya</h2>
 
       <div className="why-grid">
-        <div className="why-media">
-          <img src="/images/stand.JPG" alt="Suasana pantai Karimunjawa" />
-        </div>
-
-        <div className="why-list">
-          {points.map((p) => (
-            <div className="why-item" key={p.title}>
-              <div className="why-icon">{p.icon}</div>
-              <div>
-                <h3>{p.title}</h3>
-                <p>{p.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {points.map((p) => (
+          <div className="why-item" key={p.title}>
+            <div className="why-icon">{p.icon}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

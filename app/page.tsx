@@ -6,6 +6,7 @@ import PackageGrid from "../components/PackageGrid";
 import ActivityGrid from "../components/ActivityGrid";
 import Reviews from "../components/Reviews";
 import CTASection from "../components/CTASection";
+import HomeBookingWidget from "../components/HomeBookingWidget";
 import { getReviews } from "../lib/reviews";
 
 export const metadata: Metadata = {
@@ -224,7 +225,7 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Hero />
+      <Hero averageRating={averageRating} reviewCount={reviewCount} />
       
   <section style={{ maxWidth: 800, margin: "40px auto 0", padding: "0 20px", textAlign: "center" }}>
   <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--text-light)" }}>
@@ -244,6 +245,7 @@ export default async function Home() {
       <WhyTravelWithUs />
       <Reviews />
       <CTASection />
+      <HomeBookingWidget />
     </>
   );
 }

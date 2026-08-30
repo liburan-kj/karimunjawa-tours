@@ -1,10 +1,14 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "600", "700"] });
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jakarta",
+});
 
 export const metadata = {
   title: "Karimunjawa Tours - Agen Tour Karimunjawa Terpercaya",
@@ -14,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id">
-      <body className={poppins.className}>
+      <body className={jakarta.variable}>
         <Header />
         {children}
         <Footer />

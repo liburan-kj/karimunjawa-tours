@@ -1,9 +1,61 @@
-export default function Hero() {
+import { Icon } from "@iconify/react";
+
+type HeroProps = {
+  averageRating?: number;
+  reviewCount?: number;
+};
+
+export default function Hero({ averageRating, reviewCount }: HeroProps) {
+  const ratingLabel =
+    averageRating && reviewCount
+      ? `${averageRating.toFixed(1)} bintang (${reviewCount.toLocaleString("id-ID")} ulasan)`
+      : "4.9 bintang di Google";
+
   return (
     <section className="hero-section">
-      <h1>Wujudkan Liburan Impianmu Bersama Karimunjawa Tours</h1>
-      <p>Paket tour terpercaya, harga bersahabat, dan pengalaman wisata tak terlupakan menjelajahi keindahan Kepulauan Karimunjawa</p>
-      <a className="btn-cta" href="#paket-wisata">Lihat Pilihan Paket</a>
+      <div className="hero-floats" aria-hidden="true">
+        <div className="hero-float hero-float--1">
+          <img src="/images/stand.JPG" alt="" />
+        </div>
+        <div className="hero-float hero-float--2">
+          <img src="/images/jump.jpg" alt="" />
+        </div>
+        <div className="hero-float hero-float--3">
+          <img src="/images/island-hopping.png" alt="" />
+        </div>
+        <div className="hero-float hero-float--4">
+          <img src="/images/scuba-diving.jpg" alt="" />
+        </div>
+      </div>
+
+      <div style={{ position: "relative", zIndex: 2 }}>
+        <h1>Wujudkan Liburan Impianmu Bersama Karimunjawa Tours</h1>
+        <p>
+          Paket tour terpercaya, harga bersahabat, dan pengalaman wisata tak
+          terlupakan menjelajahi keindahan Kepulauan Karimunjawa
+        </p>
+        <a className="btn-cta" href="#paket-wisata">
+          <span>Lihat Pilihan Paket</span>
+          <span className="btn-cta-arrow">
+            <Icon icon="lucide:arrow-right" />
+          </span>
+        </a>
+      </div>
+
+      <div className="hero-stats">
+        <span className="hero-stat">
+          <Icon icon="lucide:star" />
+          {ratingLabel}
+        </span>
+        <span className="hero-stat">
+          <Icon icon="lucide:users" />
+          Ribuan wisatawan sejak 2015
+        </span>
+        <span className="hero-stat">
+          <Icon icon="lucide:instagram" />
+          @karimunjawa.tours
+        </span>
+      </div>
     </section>
   );
 }
