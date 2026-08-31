@@ -35,8 +35,15 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 .hero-section {
   position: relative;
   overflow: hidden;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(to bottom, rgba(3,61,74,0.55) 0%, rgba(3,61,74,0.25) 45%, rgba(3,61,74,0.15) 100%), url('/images/wimbo.webp') center/cover;
-  color: var(--white); text-align: center; padding: 220px 20px 260px;
+  color: var(--white);
+  text-align: center;
+  padding: 160px 20px 140px;
 }
 .hero-section h1 { font-size: 46px; margin-bottom: 20px; font-weight: 600; line-height: 1.15; text-shadow: 2px 2px 10px rgba(0,0,0,0.35); max-width: 780px; margin-inline: auto; }
 .hero-section p { font-size: 18px; margin-bottom: 35px; max-width: 600px; margin-inline: auto; opacity: 0.92; text-shadow: 1px 1px 6px rgba(0,0,0,0.3); }
@@ -55,10 +62,33 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 @keyframes heroFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -16px; } }
 @media (max-width: 1100px) { .hero-floats { display: none; } }
 
-/* Trust stats row under hero */
-.hero-stats { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-top: 46px; color: rgba(255,255,255,0.92); }
-.hero-stat { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
-.hero-stat iconify-icon, .hero-stat svg { font-size: 18px; color: #ffd166; }
+/* Trust stats positioned at bottom left of hero */
+.hero-stats {
+  position: absolute;
+  bottom: 24px;
+  left: clamp(16px, 3.5vw, 40px);
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: left;
+}
+.hero-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(3, 61, 74, 0.45);
+  backdrop-filter: blur(6px);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.hero-stat iconify-icon, .hero-stat svg { font-size: 16px; color: #ffd166; }
 
 /* PACKAGE GRID */
 .pages-grid-section { max-width: 1200px; margin: 80px auto 30px; padding: 0 20px; }
@@ -132,8 +162,10 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 @media (max-width: 768px) {
   .header-inner { flex-direction: column; gap: 15px; }
   .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; }
-  .hero-section { padding: 150px 20px 200px; }
+  .hero-section { min-height: 80vh; padding: 130px 16px 140px; }
   .hero-section h1 { font-size: 30px; max-width: 100%; }
+  .hero-stats { bottom: 16px; left: 16px; right: 16px; gap: 8px; }
+  .hero-stat { font-size: 12px; padding: 5px 12px; }
   .cta-section { flex-direction: column; text-align: center; padding: 34px 24px; gap: 18px; }
   .cta-text h2 { font-size: 25px; }
   .home-booking-widget { bottom: 14px; padding: 12px 18px; }

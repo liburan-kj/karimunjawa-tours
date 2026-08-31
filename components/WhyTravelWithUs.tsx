@@ -3,10 +3,10 @@ const points = [
     title: "Armada Resmi & Aman",
     desc: "Berangkat dari Pelabuhan Kartini, Jepara dengan kapal cepat (Express Bahari) atau KMP Siginjai sesuai pilihanmu.",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M3 17h18l-2 4H5l-2-4Z" strokeLinejoin="round" />
-        <path d="M5 17V9l7-4 7 4v8" strokeLinejoin="round" />
-        <path d="M9 17V11h6v6" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v2m0 5.189V13m7-1V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6" />
+        <path d="M19.38 19A11.6 11.6 0 0 0 21 13l-8.188-3.639a2 2 0 0 0-1.624 0L3 13.001a11.6 11.6 0 0 0 2.81 7.76" />
+        <path d="M2 20c.6.5 1.2 1 2.5 1c2.5 0 2.5-2 5-2c1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2c1.3 0 1.9.5 2.5 1" />
       </svg>
     ),
   },
@@ -14,9 +14,9 @@ const points = [
     title: "Alat Snorkeling Disediakan",
     desc: "Fin, masker, dan life jacket sudah termasuk di setiap paket — tinggal berangkat dan nikmati lautnya.",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <circle cx="12" cy="9" r="5" />
-        <path d="M9 9h6M7 14c0 3 2 6 5 6s5-3 5-6" strokeLinecap="round" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 7h12a1 1 0 0 1 1 1v4.5a2.5 2.5 0 0 1-2.5 2.5H14a2 2 0 0 1-2-2a2 2 0 1 0-4 0a2 2 0 0 1-2 2h-.5A2.5 2.5 0 0 1 3 12.5V8a1 1 0 0 1 1-1" />
+        <path d="M10 17a2 2 0 0 0 2 2h3.5a5.5 5.5 0 0 0 5.5-5.5V4" />
       </svg>
     ),
   },
