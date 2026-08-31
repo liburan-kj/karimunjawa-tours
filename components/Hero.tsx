@@ -16,16 +16,44 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
     <section className="hero-section">
       <div className="hero-floats" aria-hidden="true">
         <div className="hero-float hero-float--1">
-          <Image src="/images/stand.JPG" alt="" width={400} height={300} priority />
+          <Image 
+            src="/images/stand.JPG" 
+            alt="" 
+            fill 
+            priority 
+            unoptimized
+            className="object-cover"
+          />
         </div>
         <div className="hero-float hero-float--2">
-          <Image src="/images/jump.jpg" alt="" width={400} height={300} priority />
+          <Image 
+            src="/images/jump.jpg" 
+            alt="" 
+            fill 
+            priority 
+            unoptimized
+            className="object-cover"
+          />
         </div>
         <div className="hero-float hero-float--3">
-          <Image src="/images/island-hopping.png" alt="" width={400} height={300} priority />
+          <Image 
+            src="/images/island-hopping.png" 
+            alt="" 
+            fill 
+            priority 
+            unoptimized
+            className="object-cover"
+          />
         </div>
         <div className="hero-float hero-float--4">
-          <Image src="/images/scuba-diving.jpg" alt="" width={400} height={300} priority />
+          <Image 
+            src="/images/scuba-diving.jpg" 
+            alt="" 
+            fill 
+            priority 
+            unoptimized
+            className="object-cover"
+          />
         </div>
       </div>
 
