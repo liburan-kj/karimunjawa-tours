@@ -14,30 +14,8 @@ export default function TentangKamiPage() {
 
   const organizationSchema = generateOrganizationSchema();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Karimunjawa Tours",
-    url: "https://karimunjawa.tours",
-    logo: "https://karimunjawa.tours/images/satu.jpg",
-    foundingDate: "2015",
-    telephone: "+62-822-2533-6306",
-    email: "liburan@karimunjawa.tours",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Karimunjawa, Jepara",
-      addressRegion: "Jawa Tengah",
-      addressCountry: "ID",
-    },
-    sameAs: ["https://www.instagram.com/karimunjawa.tours"],
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

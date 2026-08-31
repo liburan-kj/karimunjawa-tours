@@ -8,6 +8,7 @@ import Reviews from "../components/Reviews";
 import CTASection from "../components/CTASection";
 import HomeBookingWidget from "../components/HomeBookingWidget";
 import { getReviews } from "../lib/reviews";
+import { BRAND_ALTERNATE_NAMES, BRAND_SAME_AS } from "../lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Karimunjawa Tours | Paket Wisata Karimunjawa Terpercaya",
@@ -49,6 +50,8 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": ["TravelAgency", "LocalBusiness", "Organization"],
     name: "Karimunjawa Tours",
+    alternateName: BRAND_ALTERNATE_NAMES,
+    identifier: "https://karimunjawa.tours",
     url: "https://karimunjawa.tours",
     image: "https://karimunjawa.tours/images/satu.jpg",
     logo: "https://karimunjawa.tours/images/satu.jpg",
@@ -95,10 +98,7 @@ export default async function Home() {
       areaServed: "ID",
       availableLanguage: ["Indonesian", "English"],
     },
-    sameAs: [
-      "https://www.instagram.com/karimunjawa.tours",
-      "https://maps.app.goo.gl/Gou7H9Ls6hAWSPpx5",
-    ],
+    sameAs: BRAND_SAME_AS,
     aggregateRating:
       reviewCount > 0
         ? {

@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { generateWebsiteSchema } from "../lib/jsonld";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -16,9 +17,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const websiteSchema = generateWebsiteSchema();
+
   return (
     <html lang="id">
       <body className={jakarta.variable}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <Header />
         {children}
         <Footer />

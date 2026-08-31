@@ -1,5 +1,6 @@
 import '../globals.css';
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Karimunjawa Tours - SuperDesign Version",
@@ -15,8 +16,8 @@ export default function TestLayout({
     <html lang="id" className="scroll-smooth" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
         {/* Tailwind CSS and Iconify */}
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+        <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" strategy="beforeInteractive" />
         
         {/* Google Fonts */}
         <style>

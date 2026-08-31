@@ -17,12 +17,23 @@ export type ReviewsData = {
 const WIDGET_URL =
   "https://featurable.com/api/v2/widgets/9f38c68b-e1ab-4a2d-bc3e-7d11cf8ab0cb";
 
+// Minimal shape of a raw review object from the Featurable widget API —
+// only the fields this file actually reads.
+type RawReview = {
+  id: string;
+  author?: { name?: string; avatarUrl?: string };
+  originalText?: string;
+  text?: string;
+  rating?: { value?: number };
+  publishedAt: string;
+};
+
 export async function getReviews(): Promise<ReviewsData> {
   const res = await fetch(WIDGET_URL, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error("Gagal fetch reviews: " + res.status);
   const data = await res.json();
 
-  const reviews: Review[] = (data.widget?.reviews || []).map((r: any) => ({
+  const reviews: Review[] = (data.widget?.reviews || []).map((r: RawReview) => ({
     id: r.id,
     authorName: r.author?.name || "Anonim",
     avatarUrl: r.author?.avatarUrl || null,

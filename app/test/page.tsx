@@ -269,7 +269,7 @@ export default function TestPage() {
               <Icon icon="mdi:star"/>
               <Icon icon="mdi:star"/>
             </div>
-            <p className="text-stone-600 italic mb-8 leading-relaxed" data-sd-id="151">"Perjalanan paling terorganisir yang pernah saya lakukan. Titik snorkeling yang sepi dan air yang luar biasa bening. 10/10!"</p>
+            <p className="text-stone-600 italic mb-8 leading-relaxed" data-sd-id="151">&quot;Perjalanan paling terorganisir yang pernah saya lakukan. Titik snorkeling yang sepi dan air yang luar biasa bening. 10/10!&quot;</p>
             <div className="flex items-center gap-4" data-sd-id="152">
               <div className="w-14 h-14 rounded-full bg-stone-200 overflow-hidden" data-sd-id="153">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" className="w-full h-full object-cover" data-sd-id="154"/>
@@ -289,7 +289,7 @@ export default function TestPage() {
               <Icon icon="mdi:star"/>
               <Icon icon="mdi:star"/>
             </div>
-            <p className="italic mb-8 leading-relaxed text-sky-50" data-sd-id="160">"Berenang bersama hiu di Menjangan Besar adalah sorotan hidup saya. Pemandu kami, Mas Adi, sangat hebat dan paham sekali soal biota laut."</p>
+            <p className="italic mb-8 leading-relaxed text-sky-50" data-sd-id="160">&quot;Berenang bersama hiu di Menjangan Besar adalah sorotan hidup saya. Pemandu kami, Mas Adi, sangat hebat dan paham sekali soal biota laut.&quot;</p>
             <div className="flex items-center gap-4" data-sd-id="161">
               <div className="w-14 h-14 rounded-full bg-white/20 overflow-hidden" data-sd-id="162">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="User" className="w-full h-full object-cover" data-sd-id="163"/>
@@ -309,7 +309,7 @@ export default function TestPage() {
               <Icon icon="mdi:star"/>
               <Icon icon="mdi:star"/>
             </div>
-            <p className="text-stone-600 italic mb-8 leading-relaxed" data-sd-id="169">"Makan siang ikan bakar di pinggir Pantai Tanjung Gelam luar biasa nikmat. Suasananya pas banget untuk bulan madu!"</p>
+            <p className="text-stone-600 italic mb-8 leading-relaxed" data-sd-id="169">&quot;Makan siang ikan bakar di pinggir Pantai Tanjung Gelam luar biasa nikmat. Suasananya pas banget untuk bulan madu!&quot;</p>
             <div className="flex items-center gap-4" data-sd-id="170">
               <div className="w-14 h-14 rounded-full bg-stone-200 overflow-hidden" data-sd-id="171">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Linda" alt="User" className="w-full h-full object-cover" data-sd-id="172"/>

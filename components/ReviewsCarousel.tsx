@@ -67,6 +67,15 @@ function ReviewCard({ review }: { review: Review }) {
 export default function ReviewsCarousel({ reviews }: { reviews: Review[] }) {
   const [perView, setPerView] = useState(1);
   const [index, setIndex] = useState(0);
+  // Tracks the perView value `index` was last reset for, so we can reset
+  // `index` to 0 the moment `perView` changes — without doing it inside a
+  // useEffect (which would cause an extra render pass). This is React's
+  // recommended "adjusting state when a prop changes" pattern.
+  const [lastPerView, setLastPerView] = useState(perView);
+  if (perView !== lastPerView) {
+    setLastPerView(perView);
+    setIndex(0);
+  }
 
   useEffect(() => {
     const updatePerView = () => setPerView(window.innerWidth >= 768 ? 3 : 1);
@@ -76,10 +85,6 @@ export default function ReviewsCarousel({ reviews }: { reviews: Review[] }) {
   }, []);
 
   const pages = chunk(reviews, perView);
-
-  useEffect(() => {
-    setIndex(0);
-  }, [perView]);
 
   useEffect(() => {
     if (pages.length <= 1) return;

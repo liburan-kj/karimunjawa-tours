@@ -14,7 +14,21 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim();
 }
 
-function mapPost(p: any): Article {
+// Minimal shape of a raw WordPress REST API post — only the fields
+// this file actually reads.
+type RawWordPressPost = {
+  id: number;
+  slug: string;
+  date: string;
+  title?: { rendered?: string };
+  excerpt?: { rendered?: string };
+  content?: { rendered?: string };
+  _embedded?: {
+    "wp:featuredmedia"?: Array<{ source_url?: string }>;
+  };
+};
+
+function mapPost(p: RawWordPressPost): Article {
   const featuredImage =
     p._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null;
 
