@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { Room } from "../lib/hotelData";
+import Image from "next/image";
 
 function resizeBloggerImg(url: string, size: number) {
   return url.replace(/\/s\d+(-c)?\//, `/s${size}/`);
@@ -23,7 +24,7 @@ export default function HotelLightbox({
   useEffect(() => {
     if (!room) return;
     room.photos.forEach((src) => {
-      const img = new Image();
+      const img = new window.Image();
       img.src = resizeBloggerImg(src, 800);
     });
   }, [room]);
@@ -41,7 +42,13 @@ export default function HotelLightbox({
         <button className="rlb-close" onClick={onClose}>✕</button>
         <div className="rlb-carousel">
           {room.photos.length > 0 && (
-            <img src={resizeBloggerImg(room.photos[photoIndex], 800)} alt={room.room} />
+            <Image 
+              src={resizeBloggerImg(room.photos[photoIndex], 800)} 
+              alt={room.room} 
+              width={800} 
+              height={600}
+              className="rlb-main-img"
+            />
           )}
           {room.photos.length > 1 && (
             <>

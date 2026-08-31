@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getPackageLowPriceLabel, type PackageSlug } from "../lib/packagePricing";
 
 type Package = {
@@ -76,7 +77,13 @@ export default async function PackageGrid() {
         {packagesWithPrice.map((pkg) => (
           <div className="page-card" key={pkg.slug}>
             <Link className="page-card-image-wrap" href={`/paket/${pkg.slug}`}>
-              <img className="page-card-img" loading="lazy" alt={pkg.title} src={pkg.img} />
+              <Image 
+                className="page-card-img" 
+                alt={pkg.title} 
+                src={pkg.img} 
+                width={400} 
+                height={300}
+              />
               <div className="page-card-badge"><span className="badge-text">{pkg.price}</span></div>
             </Link>
             <div className="page-card-body">

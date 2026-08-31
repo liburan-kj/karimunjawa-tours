@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 
 type HeroProps = {
   averageRating?: number;
@@ -15,16 +16,16 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
     <section className="hero-section">
       <div className="hero-floats" aria-hidden="true">
         <div className="hero-float hero-float--1">
-          <img src="/images/stand.JPG" alt="" />
+          <Image src="/images/stand.JPG" alt="" width={400} height={300} priority />
         </div>
         <div className="hero-float hero-float--2">
-          <img src="/images/jump.jpg" alt="" />
+          <Image src="/images/jump.jpg" alt="" width={400} height={300} priority />
         </div>
         <div className="hero-float hero-float--3">
-          <img src="/images/island-hopping.png" alt="" />
+          <Image src="/images/island-hopping.png" alt="" width={400} height={300} priority />
         </div>
         <div className="hero-float hero-float--4">
-          <img src="/images/scuba-diving.jpg" alt="" />
+          <Image src="/images/scuba-diving.jpg" alt="" width={400} height={300} priority />
         </div>
       </div>
 

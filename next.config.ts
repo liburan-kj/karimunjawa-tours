@@ -1,6 +1,46 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.dicebear.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'imgur.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '1.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '2.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '3.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '4.bp.blogspot.com',
+      },
+    ],
+  },
   async redirects() {
     return [
       // Halaman paket wisata

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 type Activity = {
   slug: string;
@@ -43,7 +44,13 @@ export default function ActivityGrid() {
         {activities.map((act) => (
           <div className="activity-card" key={act.slug}>
             <Link className="activity-card-image-wrap" href={`/aktivitas/${act.slug}`}>
-              <img className="activity-card-img" loading="lazy" alt={act.title} src={act.img} />
+              <Image 
+                className="activity-card-img" 
+                alt={act.title} 
+                src={act.img} 
+                width={400} 
+                height={300}
+              />
               <div className="page-card-badge">
                 <span className="badge-text">{act.priceLabel}</span>
               </div>
