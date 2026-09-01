@@ -1,5 +1,5 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -29,7 +29,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
-        <GoogleAnalytics gaId="G-S4MNSBK9Z5" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-S4MNSBK9Z5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S4MNSBK9Z5', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
       </body>
     </html>
   );
