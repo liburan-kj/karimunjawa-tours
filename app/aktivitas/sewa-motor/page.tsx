@@ -1,3 +1,4 @@
+import Image from "next/image";
 import CTASection from "../../../components/CTASection";
 import Breadcrumb from "../../../components/Breadcrumb";
 
@@ -61,10 +62,14 @@ export default function Page() {
         <p>Penuhi kebutuhan transportasi selama di Karimunjawa dengan bebas sesuai jadwalmu sendiri.</p>
       </div>
 
-      <img
+      <Image
         src="/images/sewa-motor.jpg"
         alt="Sewa Motor Karimunjawa - motor yang siap disewa untuk transportasi wisata"
-        style={{ width: "100%", borderRadius: 14, marginBottom: 24 }}
+        width={800}
+        height={450}
+        priority
+        sizes="(max-width: 800px) 100vw, 800px"
+        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24 }}
       />
 
       <div className="pkg-desc">

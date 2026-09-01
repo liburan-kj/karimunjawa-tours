@@ -40,10 +40,26 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(3,61,74,0.55) 0%, rgba(3,61,74,0.25) 45%, rgba(3,61,74,0.15) 100%), url('/images/wimbo.webp') center/cover;
+  background-color: var(--primary-teal);
   color: var(--white);
   text-align: center;
   padding: 160px 20px 140px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-bg-img {
+  object-fit: cover;
+  object-position: center;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,61,74,0.55) 0%, rgba(3,61,74,0.25) 45%, rgba(3,61,74,0.15) 100%);
+  z-index: 1;
 }
 .hero-section h1 { font-size: 46px; margin-bottom: 20px; font-weight: 600; line-height: 1.15; text-shadow: 2px 2px 10px rgba(0,0,0,0.35); max-width: 780px; margin-inline: auto; }
 .hero-section p { font-size: 18px; margin-bottom: 35px; max-width: 600px; margin-inline: auto; opacity: 0.92; text-shadow: 1px 1px 6px rgba(0,0,0,0.3); }
@@ -52,7 +68,7 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 .btn-cta-arrow { width: 26px; height: 26px; border-radius: 50%; background: var(--primary-teal); color: var(--white); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; }
 
 /* Floating polaroid images over hero */
-.hero-floats { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero-floats { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .hero-float { position: absolute; border-radius: 22px; overflow: hidden; box-shadow: 10px 12px 24px rgba(0,0,0,0.28); animation: heroFloat 6s ease-in-out infinite; }
 .hero-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-float--1 { top: 16%; left: 6%; width: 170px; height: 220px; transform: rotate(-6deg); animation-delay: 0s; }

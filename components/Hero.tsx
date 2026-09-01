@@ -14,14 +14,26 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
 
   return (
     <section className="hero-section">
+      <div className="hero-bg" aria-hidden="true">
+        <Image
+          src="/images/wimbo.webp"
+          alt="Keindahan Wisata Karimunjawa"
+          fill
+          priority
+          sizes="100vw"
+          quality={85}
+          className="hero-bg-img"
+        />
+        <div className="hero-overlay" />
+      </div>
+
       <div className="hero-floats" aria-hidden="true">
         <div className="hero-float hero-float--1">
           <Image 
-            src="/images/stand.JPG" 
+            src="/images/stand.jpg" 
             alt="" 
             fill 
-            priority 
-            unoptimized
+            sizes="170px"
             className="object-cover"
           />
         </div>
@@ -30,8 +42,7 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
             src="/images/jump.jpg" 
             alt="" 
             fill 
-            priority 
-            unoptimized
+            sizes="200px"
             className="object-cover"
           />
         </div>
@@ -40,8 +51,7 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
             src="/images/island-hopping.png" 
             alt="" 
             fill 
-            priority 
-            unoptimized
+            sizes="210px"
             className="object-cover"
           />
         </div>
@@ -50,8 +60,7 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
             src="/images/scuba-diving.jpg" 
             alt="" 
             fill 
-            priority 
-            unoptimized
+            sizes="180px"
             className="object-cover"
           />
         </div>

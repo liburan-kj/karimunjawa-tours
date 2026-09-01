@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Itinerary from "../../../components/Itinerary";
 import FloatingCTA from "../../../components/FloatingCTA";
 import Breadcrumb from "../../../components/Breadcrumb";
@@ -82,10 +83,14 @@ export default function Page() {
         <p>2x dive di spot berbeda, khusus untuk pemilik lisensi scuba diving.</p>
       </div>
 
-      <img
+      <Image
         src="/images/scuba-diving.jpg"
         alt="Diving Trip Karimunjawa - penyelam di perairan Karimunjawa"
-        style={{ width: "100%", borderRadius: 14, marginBottom: 24 }}
+        width={800}
+        height={450}
+        priority
+        sizes="(max-width: 800px) 100vw, 800px"
+        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24 }}
       />
 
       <div className="pkg-desc">

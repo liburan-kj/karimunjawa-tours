@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Itinerary from "../../../components/Itinerary";
 import FloatingCTA from "../../../components/FloatingCTA";
 import Breadcrumb from "../../../components/Breadcrumb";
@@ -86,10 +87,14 @@ export default function Page() {
         <p>Tur laut sehari penuh buat kamu yang sudah punya tiket penyeberangan dan penginapan sendiri.</p>
       </div>
 
-      <img
+      <Image
         src="/images/island-hopping.png"
         alt="One Day Trip Karimunjawa - snorkeling dan island hopping bersama peserta"
-        style={{ width: "100%", borderRadius: 14, marginBottom: 24 }}
+        width={800}
+        height={450}
+        priority
+        sizes="(max-width: 800px) 100vw, 800px"
+        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24 }}
       />
 
       <div className="pkg-desc">
