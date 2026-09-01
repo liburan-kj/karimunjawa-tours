@@ -6,7 +6,7 @@
   /* Brand palette */
   --primary-teal: #033D4A;
   --accent-water: #60C0D8;
-  --bg-cream: #FAF8F0;
+  --bg-cream: #F3F7FA;
 
   /* Kept as aliases so existing rules referencing the old names still resolve */
   --ocean-blue: var(--accent-water);
@@ -14,7 +14,7 @@
   --white: #ffffff;
   --text-dark: #22333a;
   --text-light: #5c6b70;
-  --bg-light: var(--bg-cream);
+  --bg-light: #F3F7FA;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,7 +23,7 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 .font-display { font-family: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
 
 /* HEADER */
-.site-header { background: rgba(250, 248, 240, 0.92); backdrop-filter: blur(10px); box-shadow: 0 2px 16px rgba(3,61,74,0.06); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(3,61,74,0.06); }
+.site-header { background: rgba(243, 247, 250, 0.92); backdrop-filter: blur(10px); box-shadow: 0 2px 16px rgba(3,61,74,0.06); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(3,61,74,0.06); }
 .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; }
 .logo-link { display: inline-flex; align-items: center; gap: 10px; }
 .site-logo { max-height: 46px; width: auto; object-fit: contain; }

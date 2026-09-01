@@ -63,7 +63,7 @@
   width: 52px;
   height: 52px;
   border-radius: 16px;
-  background: var(--bg-cream, #FAF8F0);
+  background: var(--bg-cream, #F3F7FA);
   display: flex;
   align-items: center;
   justify-content: center;
