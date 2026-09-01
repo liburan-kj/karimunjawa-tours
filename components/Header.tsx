@@ -13,7 +13,6 @@ export default function Header() {
             src="/images/satu.png"
             width={150}
             height={50}
-            priority
           />
         </Link>
         <nav className="main-nav">

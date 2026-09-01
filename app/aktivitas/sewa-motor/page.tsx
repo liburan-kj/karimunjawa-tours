@@ -68,6 +68,7 @@ export default function Page() {
         width={800}
         height={450}
         priority
+        fetchPriority="high"
         sizes="(max-width: 800px) 100vw, 800px"
         style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24 }}
       />

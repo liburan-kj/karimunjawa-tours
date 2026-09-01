@@ -20,6 +20,7 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
           alt="Keindahan Wisata Karimunjawa"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           quality={85}
           className="hero-bg-img"
