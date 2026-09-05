@@ -43,6 +43,43 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: `
+              default-src 'self';
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' www.googletagmanager.com www.google-analytics.com;
+              style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+              img-src 'self' data: images.unsplash.com upload.wikimedia.org api.dicebear.com imgur.com *.blogspot.com;
+              connect-src 'self' www.google-analytics.com region1.google-analytics.com featurable.com kjawatours.blogspot.com;
+              frame-src 'self' www.google.com;
+              font-src 'self' fonts.gstatic.com;
+              object-src 'none';
+              base-uri 'self';
+              form-action 'self';
+              frame-ancestors 'none';
+            `.replace(/\s+/g, ' ').trim(),
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Halaman paket wisata

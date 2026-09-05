@@ -1,4 +1,5 @@
 import { cache } from "react";
+import DOMPurify from "isomorphic-dompurify";
 
 export type Article = {
   id: string;
@@ -72,7 +73,7 @@ function resizeBloggerThumb(url: string, size = 1200): string {
 
 function mapEntry(entry: BloggerEntry): Article {
   const rawContent = entry.content?.$t || entry.summary?.$t || "";
-  const content = unwrapImageLinks(rawContent);
+  const content = DOMPurify.sanitize(unwrapImageLinks(rawContent));
   const plainText = stripHtml(content);
 
   const thumb = entry.media$thumbnail?.url;
