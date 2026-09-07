@@ -44,12 +44,14 @@ export default function ActivityGrid() {
         {activities.map((act) => (
           <div className="activity-card" key={act.slug}>
             <Link className="activity-card-image-wrap" href={`/aktivitas/${act.slug}`}>
-              <Image 
-                className="activity-card-img" 
-                alt={act.title} 
-                src={act.img} 
-                width={400} 
-                height={300}
+              <Image
+                className="activity-card-img"
+                alt={act.title}
+                src={act.img}
+                width={1280}
+                height={720}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
+                quality={85}
               />
               <div className="page-card-badge">
                 <span className="badge-text">{act.priceLabel}</span>

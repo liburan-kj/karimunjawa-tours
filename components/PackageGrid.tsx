@@ -77,12 +77,14 @@ export default async function PackageGrid() {
         {packagesWithPrice.map((pkg) => (
           <div className="page-card" key={pkg.slug}>
             <Link className="page-card-image-wrap" href={`/paket/${pkg.slug}`}>
-              <Image 
-                className="page-card-img" 
-                alt={pkg.title} 
-                src={pkg.img} 
-                width={400} 
-                height={300}
+              <Image
+                className="page-card-img"
+                alt={pkg.title}
+                src={pkg.img}
+                width={1280}
+                height={720}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
+                quality={85}
               />
               <div className="page-card-badge"><span className="badge-text">{pkg.price}</span></div>
             </Link>

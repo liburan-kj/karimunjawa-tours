@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import type { Review } from "../lib/reviews";
 import { formatRelativeTime } from "../lib/reviews";
 
@@ -27,11 +28,14 @@ function ReviewCard({ review }: { review: Review }) {
       }}
     >
       {review.avatarUrl ? (
-        <img
+        <Image
           src={review.avatarUrl}
           alt={review.authorName}
+          width={52}
+          height={52}
+          unoptimized
           referrerPolicy="no-referrer"
-          style={{ width: 52, height: 52, borderRadius: "50%", margin: "0 auto 12px" }}
+          style={{ borderRadius: "50%", margin: "0 auto 12px", objectFit: "cover" }}
         />
       ) : (
         <div

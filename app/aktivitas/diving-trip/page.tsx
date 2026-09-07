@@ -91,7 +91,7 @@ export default function Page() {
         priority
         fetchPriority="high"
         sizes="(max-width: 800px) 100vw, 800px"
-        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24 }}
+        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24, objectFit: "cover" }}
       />
 
       <div className="pkg-desc">

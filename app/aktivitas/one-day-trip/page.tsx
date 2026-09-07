@@ -90,12 +90,13 @@ export default function Page() {
       <Image
         src="/images/island-hopping.png"
         alt="One Day Trip Karimunjawa - snorkeling dan island hopping bersama peserta"
-        width={800}
-        height={450}
+        width={1920}
+        height={1280}
         priority
         fetchPriority="high"
         sizes="(max-width: 800px) 100vw, 800px"
-        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24 }}
+        quality={90}
+        style={{ width: "100%", height: "auto", borderRadius: 14, marginBottom: 24, display: "block", objectFit: "cover" }}
       />
 
       <div className="pkg-desc">
