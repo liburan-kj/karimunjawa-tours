@@ -1,21 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { Room } from "../lib/hotelData";
 import HotelLightbox from "./HotelLightbox";
 
-function resizeBloggerImg(url: string, size: number) {
-  return url.replace(/\/s\d+(-c)?\//, `/s${size}/`);
-}
-
-export default function RoomThumbnail({ 
-  room, 
-  hotelKey, 
-  packageName 
-}: { 
-  room: Room; 
-  hotelKey: string; 
-  packageName: string 
+export default function RoomThumbnail({
+  room,
+  hotelKey,
+  packageName
+}: {
+  room: Room;
+  hotelKey: string;
+  packageName: string
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,25 +22,28 @@ export default function RoomThumbnail({
 
   return (
     <>
-      <div 
-        className="room-cell-clickable" 
+      <div
+        className="room-cell-clickable"
         onClick={() => setIsOpen(true)}
         style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        <img 
-          className="room-thumb" 
-          src={resizeBloggerImg(room.photos[0], 100)} 
-          alt={room.room} 
+        <Image
+          className="room-thumb"
+          src={room.photos[0]}
+          alt={room.room}
+          width={36}
+          height={36}
+          sizes="36px"
         />
         <span>{room.room}</span>
       </div>
-      
+
       {isOpen && (
-        <HotelLightbox 
-          room={room} 
-          hotelKey={hotelKey} 
-          packageName={packageName} 
-          onClose={() => setIsOpen(false)} 
+        <HotelLightbox
+          room={room}
+          hotelKey={hotelKey}
+          packageName={packageName}
+          onClose={() => setIsOpen(false)}
         />
       )}
     </>

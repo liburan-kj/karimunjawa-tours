@@ -1,6 +1,7 @@
 import Breadcrumb from "../../components/Breadcrumb";
 import { getInstagramFeed } from "../../lib/instagramFeed";
 import { generateBreadcrumbSchema } from "../../lib/jsonld";
+import Image from "next/image";
 
 export const metadata = {
   title: "Galeri - Karimunjawa Tours",
@@ -37,7 +38,14 @@ export default async function GaleriPage() {
       {/* Profil Instagram */}
       <div className="ig-profile-card">
         <div className="ig-avatar-wrap">
-          <img className="ig-avatar" src={profile.profilePictureUrl} alt="Logo Karimunjawa Tours" />
+          <Image
+            className="ig-avatar"
+            src={profile.profilePictureUrl}
+            alt="Logo Karimunjawa Tours"
+            width={80}
+            height={80}
+            sizes="80px"
+          />
         </div>
         <div className="ig-info">
           <div className="ig-username-row">
@@ -89,11 +97,12 @@ export default async function GaleriPage() {
                 position: "relative",
               }}
             >
-              <img
+              <Image
                 src={post.thumbUrl}
                 alt={post.caption.slice(0, 80) || "Karimunjawa Tours"}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                fill
+                sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 240px"
+                style={{ objectFit: "cover" }}
               />
               {(post.mediaType === "VIDEO" || post.isReel) && (
                 <span

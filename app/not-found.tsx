@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = {
   title: "404 - Halaman Tidak Ditemukan",
@@ -16,7 +17,13 @@ export default function NotFound() {
         <div className="waves" aria-hidden="true" />
 
         <div className="obj" aria-hidden="true">
-          <img src="https://imgur.com/w0Yb4MX.png" alt="" />
+          <Image
+            src="https://imgur.com/w0Yb4MX.png"
+            alt=""
+            width={300}
+            height={400}
+            unoptimized
+          />
         </div>
 
         <div className="t404">404</div>
