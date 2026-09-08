@@ -23,6 +23,18 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'blogger.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'bp.blogspot.com',
       },
       {
@@ -82,7 +94,7 @@ const nextConfig: NextConfig = {
               default-src 'self';
               script-src 'self' 'unsafe-inline' 'unsafe-eval' www.googletagmanager.com www.google-analytics.com;
               style-src 'self' 'unsafe-inline' fonts.googleapis.com;
-              img-src 'self' data: images.unsplash.com upload.wikimedia.org api.dicebear.com imgur.com *.blogspot.com cdn2.behold.pictures behold.pictures *.cdninstagram.com lh3.googleusercontent.com lh4.googleusercontent.com lh5.googleusercontent.com lh6.googleusercontent.com;
+              img-src 'self' data: blob: https: images.unsplash.com upload.wikimedia.org api.dicebear.com imgur.com *.blogspot.com *.bp.blogspot.com bp.blogspot.com *.googleusercontent.com blogger.googleusercontent.com cdn2.behold.pictures behold.pictures *.cdninstagram.com lh3.googleusercontent.com lh4.googleusercontent.com lh5.googleusercontent.com lh6.googleusercontent.com;
               connect-src 'self' www.google-analytics.com region1.google-analytics.com featurable.com kjawatours.blogspot.com;
               frame-src 'self' www.google.com;
               font-src 'self' fonts.gstatic.com;

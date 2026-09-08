@@ -58,9 +58,13 @@ function slugFromLink(entry: BloggerEntry): string {
   return idParts[idParts.length - 1];
 }
 
+function upgradeToHttps(url: string): string {
+  return url ? url.replace(/^http:\/\//i, "https://") : url;
+}
+
 function extractFirstImage(html: string): string | null {
   const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? match[1] : null;
+  return match ? upgradeToHttps(match[1]) : null;
 }
 
 function unwrapImageLinks(html: string): string {
@@ -68,16 +72,26 @@ function unwrapImageLinks(html: string): string {
 }
 
 function resizeBloggerThumb(url: string, size = 1200): string {
-  return url.replace(/\/s\d+(-c)?\//, `/s${size}/`);
+  if (!url) return url;
+  let cleanUrl = upgradeToHttps(url);
+  cleanUrl = cleanUrl.replace(/\/(s|w)\d+([^/]*)\//i, `/s${size}/`);
+  return cleanUrl;
 }
 
 function mapEntry(entry: BloggerEntry): Article {
-  const rawContent = entry.content?.$t || entry.summary?.$t || "";
-  const content = DOMPurify.sanitize(unwrapImageLinks(rawContent));
+  let rawContent = entry.content?.$t || entry.summary?.$t || "";
+  rawContent = rawContent.replace(/src=["']http:\/\/([^"']+)["']/gi, 'src="https://$1"');
+  rawContent = unwrapImageLinks(rawContent);
+
+  const content = DOMPurify.sanitize(rawContent, {
+    ADD_TAGS: ["iframe"],
+    ADD_ATTR: ["target", "allow", "allowfullscreen", "frameborder", "scrolling", "src", "alt", "title", "loading"],
+  });
   const plainText = stripHtml(content);
 
   const thumb = entry.media$thumbnail?.url;
-  const featuredImage = thumb ? resizeBloggerThumb(thumb) : extractFirstImage(content);
+  const rawFeaturedImage = thumb ? resizeBloggerThumb(thumb) : extractFirstImage(content);
+  const featuredImage = rawFeaturedImage ? upgradeToHttps(rawFeaturedImage) : null;
 
   return {
     id: entry.id?.$t || "",
