@@ -25,7 +25,7 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 /* HEADER */
 .site-header { background: rgba(243, 247, 250, 0.92); backdrop-filter: blur(10px); box-shadow: 0 2px 16px rgba(3,61,74,0.06); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(3,61,74,0.06); }
 .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; }
-.logo-link { display: inline-flex; align-items: center; gap: 10px; }
+.logo-link { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .site-logo { max-height: 46px; width: auto; object-fit: contain; }
 .main-nav ul { list-style: none; display: flex; align-items: center; gap: 6px; background: rgba(3,61,74,0.04); padding: 6px; border-radius: 999px; }
 .main-nav a { color: var(--primary-teal); font-weight: 600; font-size: 13.5px; letter-spacing: 0.02em; padding: 9px 16px; border-radius: 999px; display: inline-block; }
@@ -38,11 +38,13 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
   justify-content: center;
   width: 42px;
   height: 42px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: rgba(3,61,74,0.06);
   color: var(--primary-teal);
   border: none;
   cursor: pointer;
+  z-index: 10;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 .nav-toggle:hover { background: var(--primary-teal); color: var(--white); }

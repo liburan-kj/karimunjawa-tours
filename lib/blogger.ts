@@ -92,7 +92,7 @@ function mapEntry(entry: BloggerEntry): Article {
 
 async function fetchFeed(maxResults = 50): Promise<BloggerEntry[]> {
   const res = await fetch(`${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 3600, tags: ["blogger-articles"] },
   });
   if (!res.ok) throw new Error("Gagal fetch artikel Blogger: " + res.status);
   const data = (await res.json()) as BloggerFeedResponse;

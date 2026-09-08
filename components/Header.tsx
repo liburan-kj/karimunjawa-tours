@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Icon } from "@iconify/react";
 import NavLinks from "./NavLinks";
 
 export default function Header() {
@@ -19,6 +18,8 @@ export default function Header() {
             src="/images/satu.png"
             width={150}
             height={50}
+            priority
+            style={{ width: "auto", height: "auto", maxHeight: "46px" }}
           />
         </Link>
 
@@ -36,7 +37,18 @@ export default function Header() {
           aria-controls="mobile-nav-menu"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         >
-          <Icon icon={isMenuOpen ? "lucide:x" : "lucide:menu"} width={26} height={26} />
+          {isMenuOpen ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          )}
         </button>
       </div>
 
@@ -51,3 +63,4 @@ export default function Header() {
     </header>
   );
 }
+
