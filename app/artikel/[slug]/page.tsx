@@ -15,6 +15,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${article.title} - Karimunjawa Tours`,
     description: article.excerpt.slice(0, 160),
+    alternates: {
+      canonical: `https://karimunjawa.tours/artikel/${article.slug}`,
+    },
     openGraph: {
       title: article.title,
       description: article.excerpt.slice(0, 160),

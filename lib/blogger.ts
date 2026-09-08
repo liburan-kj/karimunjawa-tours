@@ -104,17 +104,36 @@ function mapEntry(entry: BloggerEntry): Article {
   };
 }
 
-async function fetchFeed(maxResults = 50): Promise<BloggerEntry[]> {
-  const res = await fetch(`${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}`, {
-    next: { revalidate: 3600, tags: ["blogger-articles"] },
-  });
+const FEED_PAGE_SIZE = 150; // batas aman per-request Blogger JSON feed
+
+async function fetchFeedPage(startIndex: number, maxResults: number): Promise<BloggerEntry[]> {
+  const res = await fetch(
+    `${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}&start-index=${startIndex}`,
+    { next: { revalidate: 3600, tags: ["blogger-articles"] } }
+  );
   if (!res.ok) throw new Error("Gagal fetch artikel Blogger: " + res.status);
   const data = (await res.json()) as BloggerFeedResponse;
   return data.feed?.entry || [];
 }
 
+// Ambil SEMUA post dengan loop pagination (Blogger start-index dimulai dari 1),
+// bukan cuma satu batch — supaya artikel lama nggak hilang dari sitemap/generateStaticParams.
+async function fetchAllEntries(): Promise<BloggerEntry[]> {
+  const all: BloggerEntry[] = [];
+  let startIndex = 1;
+
+  while (true) {
+    const page = await fetchFeedPage(startIndex, FEED_PAGE_SIZE);
+    all.push(...page);
+    if (page.length < FEED_PAGE_SIZE) break;
+    startIndex += FEED_PAGE_SIZE;
+  }
+
+  return all;
+}
+
 export const getAllArticles = cache(async (): Promise<Article[]> => {
-  const entries = await fetchFeed(50);
+  const entries = await fetchAllEntries();
   return entries.map(mapEntry);
 });
 
@@ -141,7 +160,7 @@ export async function getArticlePageCount(perPage = ARTICLES_PER_PAGE): Promise<
 }
 
 export const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
-  const entries = await fetchFeed(50);
-  const found = entries.find((e) => slugFromLink(e) === slug);
-  return found ? mapEntry(found) : null;
+  const articles = await getAllArticles();
+  const found = articles.find((a) => a.slug === slug);
+  return found ?? null;
 });
