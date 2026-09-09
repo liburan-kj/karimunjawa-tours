@@ -104,7 +104,7 @@ export default function TentangKamiPage() {
           <div className="kjt-video-label">Lihat Keseruannya</div>
           <div className="kjt-video-frame">
             <iframe
-              src="https://www.youtube.com/embed/lCo2wihP5LA"
+              src="https://www.youtube.com/embed/ru3Xpo2a2m4"
               title="Karimunjawa Tours"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
