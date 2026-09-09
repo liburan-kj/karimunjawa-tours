@@ -9,6 +9,7 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-jakarta",
+  display: "swap",
 });
 
 export const metadata = {
@@ -21,6 +22,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="id">
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/_next/image?url=%2Fimages%2Fwimbo.webp&w=750&q=85"
+          fetchpriority="high"
+        />
+      </head>
       <body className={jakarta.variable}>
         <script
           type="application/ld+json"
