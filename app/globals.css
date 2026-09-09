@@ -198,7 +198,14 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 .btn-cta-outline:hover { background: rgba(255,255,255,0.1); }
 
 /* FOOTER */
-.site-footer { background: #05171c; color: var(--white); padding: 70px 20px 24px; margin-top: 60px; }
+.site-footer { 
+  background: linear-gradient(rgba(5, 23, 28, 0.5), rgba(5, 23, 28, 0.5)), url('/images/footer-bg.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  color: var(--white); 
+  padding: 70px 20px 24px; 
+  margin-top: 60px; 
+}
 .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; }
 .footer-widget h4 { font-size: 18px; margin-bottom: 25px; font-weight: 600; font-family: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif; position: relative; padding-bottom: 10px; }
 .footer-widget h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 3px; background: var(--accent-water); border-radius: 2px; }
@@ -241,6 +248,7 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
   .cta-section { flex-direction: column; text-align: center; padding: 34px 24px; gap: 18px; }
   .cta-text h2 { font-size: 25px; }
   .home-booking-widget { bottom: 14px; padding: 12px 18px; }
+  .site-footer { background-position: left center; }
 }
 /* PACKAGE PAGE */
 .pkg-hero { background: linear-gradient(135deg, #0a5c8a, #1c8fc7); border-radius: 14px; color: white; margin-bottom: 40px; padding: 40px; }

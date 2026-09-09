@@ -23,7 +23,7 @@ export default function Footer() {
               rel="noopener"
               aria-label="Instagram Karimunjawa Tours"
             >
-              <Icon icon="lucide:instagram" />
+              <img src="/images/icons/instagram.svg" alt="Instagram" style={{ width: '20px', height: '20px' }} />
             </a>
             <a
               className="footer-social-btn"
@@ -32,14 +32,14 @@ export default function Footer() {
               rel="noopener"
               aria-label="WhatsApp Karimunjawa Tours"
             >
-              <Icon icon="lucide:message-circle" />
+              <img src="/images/icons/whatsapp.svg" alt="WhatsApp" style={{ width: '20px', height: '20px' }} />
             </a>
             <a
               className="footer-social-btn"
               href="mailto:liburan@karimunjawa.tours"
               aria-label="Email Karimunjawa Tours"
             >
-              <Icon icon="lucide:mail" />
+              <img src="/images/icons/mail.svg" alt="Email" style={{ width: '20px', height: '20px' }} />
             </a>
           </div>
         </div>
