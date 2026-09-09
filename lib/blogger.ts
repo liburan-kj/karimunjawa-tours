@@ -134,7 +134,10 @@ async function fetchAllEntries(): Promise<BloggerEntry[]> {
 
 export const getAllArticles = cache(async (): Promise<Article[]> => {
   const entries = await fetchAllEntries();
-  return entries.map(mapEntry);
+  const articles = entries.map(mapEntry);
+  // Urutkan terbaru dulu -- feed Blogger default-nya ascending (lama -> baru),
+  // jadi tanpa sort ini artikel baru "terkubur" di halaman arsip paling akhir.
+  return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 });
 
 export async function getArticleArchivePage(
