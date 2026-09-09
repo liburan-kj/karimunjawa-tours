@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeroFloats from "./HeroFloats";
 
 type HeroProps = {
   averageRating?: number;
@@ -27,44 +28,7 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
         <div className="hero-overlay" />
       </div>
 
-      <div className="hero-floats" aria-hidden="true">
-        <div className="hero-float hero-float--1">
-          <Image 
-            src="/images/stand.jpg" 
-            alt="" 
-            fill 
-            sizes="170px"
-            className="object-cover"
-          />
-        </div>
-        <div className="hero-float hero-float--2">
-          <Image 
-            src="/images/jump.jpg" 
-            alt="" 
-            fill 
-            sizes="200px"
-            className="object-cover"
-          />
-        </div>
-        <div className="hero-float hero-float--3">
-          <Image 
-            src="/images/island-hopping.png" 
-            alt="" 
-            fill 
-            sizes="210px"
-            className="object-cover"
-          />
-        </div>
-        <div className="hero-float hero-float--4">
-          <Image 
-            src="/images/scuba-diving.jpg" 
-            alt="" 
-            fill 
-            sizes="180px"
-            className="object-cover"
-          />
-        </div>
-      </div>
+      <HeroFloats />
 
       <div style={{ position: "relative", zIndex: 2 }}>
         <h1>Wujudkan Liburan Impianmu Bersama Karimunjawa Tours</h1>
@@ -111,4 +75,3 @@ export default function Hero({ averageRating, reviewCount }: HeroProps) {
     </section>
   );
 }
-
