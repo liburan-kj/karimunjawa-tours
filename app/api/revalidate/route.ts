@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // 1. Purge Data Cache for Blogger articles
-    revalidateTag("blogger-articles");
+    revalidateTag("blogger-articles", { expire: 0 });
 
     // 2. Purge all paths under /artikel (including dynamic [slug] pages)
     // Using 'layout' type purges the path and all its children
