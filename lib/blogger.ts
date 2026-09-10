@@ -132,13 +132,13 @@ async function fetchAllEntries(): Promise<BloggerEntry[]> {
   return all;
 }
 
-export const getAllArticles = cache(async (): Promise<Article[]> => {
+export const getAllArticles = async (): Promise<Article[]> => {
   const entries = await fetchAllEntries();
   const articles = entries.map(mapEntry);
   // Urutkan terbaru dulu -- feed Blogger default-nya ascending (lama -> baru),
   // jadi tanpa sort ini artikel baru "terkubur" di halaman arsip paling akhir.
   return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-});
+};
 
 export async function getArticleArchivePage(
   page: number,
@@ -162,8 +162,8 @@ export async function getArticlePageCount(perPage = ARTICLES_PER_PAGE): Promise<
   return Math.max(1, Math.ceil(articles.length / perPage));
 }
 
-export const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
+export const getArticleBySlug = async (slug: string): Promise<Article | null> => {
   const articles = await getAllArticles();
   const found = articles.find((a) => a.slug === slug);
   return found ?? null;
-});
+};

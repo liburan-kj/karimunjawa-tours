@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { generateBreadcrumbSchema } from "../../../lib/jsonld";
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   const articles = await getAllArticles();
   return articles.map((a) => ({ slug: a.slug }));
