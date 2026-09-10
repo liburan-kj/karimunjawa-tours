@@ -111,8 +111,11 @@ async function fetchFeedPage(startIndex: number, maxResults: number): Promise<Bl
   const res = await fetch(
     `${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}&start-index=${startIndex}`,
     {
-      // ISR: cache 1 jam, update background setelah expire
-      next: { revalidate: 3600 },
+      // ISR: cache 1 jam, update background setelah expire.
+      // `tags` WAJIB ada supaya revalidateTag("blogger-articles") di /api/revalidate
+      // benar-benar bisa menemukan & menghapus entry cache ini. Tanpa tag ini,
+      // revalidateTag tidak berefek apa-apa (cache tetap dipakai sampai 3600s habis).
+      next: { revalidate: 3600, tags: ["blogger-articles"] },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     }
   );
