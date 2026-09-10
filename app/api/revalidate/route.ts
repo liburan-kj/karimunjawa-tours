@@ -15,18 +15,19 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Revalidate tag khusus data artikel Blogger (expire 0 untuk langsung purge cache)
-    revalidateTag("blogger-articles", { expire: 0 });
+    // 1. Purge Data Cache for Blogger articles
+    revalidateTag("blogger-articles");
 
-    // Revalidate rute halaman artikel dan homepage
-    revalidatePath("/artikel");
-    revalidatePath("/artikel/[slug]", "page");
-    revalidatePath("/artikel/page/[page]", "page");
-    revalidatePath("/");
+    // 2. Purge all paths under /artikel (including dynamic [slug] pages)
+    // Using 'layout' type purges the path and all its children
+    revalidatePath("/artikel", "layout");
+    
+    // 3. Purge homepage
+    revalidatePath("/", "layout");
 
     return NextResponse.json({
       revalidated: true,
-      message: "Cache artikel Blogger berhasil di-revalidate!",
+      message: "Cache berhasil dibersihkan! Semua data artikel dan homepage telah di-update.",
       timestamp: new Date().toISOString(),
     });
   } catch (err) {
