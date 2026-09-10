@@ -219,7 +219,8 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 .footer-widget ul li { margin-bottom: 10px; }
 .footer-socials { display: flex; gap: 12px; margin-top: 20px; }
 .footer-social-btn { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); color: var(--white); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; transition: background 0.25s ease; }
-.footer-social-btn:hover { background: var(--accent-water); color: var(--primary-teal); }
+.footer-social-btn img { filter: brightness(0) invert(1); }
+.footer-social-btn:hover { background: var(--accent-water); color: var(--white); }
 .copyright { text-align: center; padding-top: 30px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: rgba(255,255,255,0.6); }
 
 /* HOME BOOKING WIDGET (sticky pill bar, homepage only) */
