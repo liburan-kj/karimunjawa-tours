@@ -3,6 +3,8 @@ import ArticleArchive from "../../components/ArticleArchive";
 import { ARTICLES_PER_PAGE, getArticleArchivePage } from "../../lib/blogger";
 import { generateBreadcrumbSchema } from "../../lib/jsonld";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: "Artikel - Karimunjawa Tours",
   description: "Tips, panduan, dan cerita seputar liburan ke Karimunjawa dari tim Karimunjawa Tours.",
