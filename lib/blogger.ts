@@ -158,10 +158,9 @@ export async function getArticleArchivePage(
   };
 }
 
-export async function getArticlePageCount(perPage = ARTICLES_PER_PAGE): Promise<number> {
-  const articles = await getAllArticles();
-  return Math.max(1, Math.ceil(articles.length / perPage));
-}
+// No more getArticlePageCount as it caused server timeouts.
+// Pagination now uses hasMore logic.
+
 
 export const getArticleBySlug = async (slug: string): Promise<Article | null> => {
   // Optimasi: Alih-alih mengambil SEMUA artikel hanya untuk mencari satu slug,

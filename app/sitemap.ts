@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { ARTICLES_PER_PAGE, getAllArticles, getArticlePageCount } from "../lib/blogger";
+import { ARTICLES_PER_PAGE, getAllArticles } from "../lib/blogger";
 
 const BASE_URL = "https://karimunjawa.tours";
 

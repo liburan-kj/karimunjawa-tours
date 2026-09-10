@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation";
-import ArticleArchive from "../../../../components/ArticleArchive";
+import ArticleArchive from "../../../components/ArticleArchive";
 import {
   ARTICLES_PER_PAGE,
   getArticleArchivePage,
-  getArticlePageCount,
-} from "../../../../lib/blogger";
+} from "../../../lib/blogger";
 
 export async function generateStaticParams() {
-  const totalPages = await getArticlePageCount(ARTICLES_PER_PAGE);
-
-  return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => ({
+  // We no longer use getArticlePageCount to avoid timeouts.
+  // We generate a reasonable number of static pages (e.g., 10)
+  // The rest will be generated on-demand.
+  return Array.from({ length: 9 }, (_, index) => ({
     page: String(index + 2),
   }));
 }
