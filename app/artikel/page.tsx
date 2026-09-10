@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 export default async function ArtikelPage() {
-  const { articles, totalPages } = await getArticleArchivePage(1, ARTICLES_PER_PAGE);
+  const { articles, hasMore } = await getArticleArchivePage(1, ARTICLES_PER_PAGE);
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { label: "Beranda", href: "/" },
@@ -32,7 +32,7 @@ export default async function ArtikelPage() {
           ]}
         />
       </div>
-      <ArticleArchive articles={articles} currentPage={1} totalPages={totalPages} />
+      <ArticleArchive articles={articles} currentPage={1} hasMore={hasMore} />
     </>
   );
 }

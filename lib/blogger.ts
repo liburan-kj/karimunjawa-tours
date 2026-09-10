@@ -143,29 +143,18 @@ export const getAllArticles = async (): Promise<Article[]> => {
 export async function getArticleArchivePage(
   page: number,
   perPage = ARTICLES_PER_PAGE
-): Promise<{ articles: Article[]; totalArticles: number; totalPages: number }> {
+): Promise<{ articles: Article[]; hasMore: boolean }> {
   const safePage = Math.max(1, page);
   const startIndex = (safePage - 1) * perPage + 1;
   
-  // Hanya ambil data untuk halaman saat ini, bukan semua artikel
-  const entries = await fetchFeedPage(startIndex, perPage);
-  const articles = entries.map(mapEntry);
-  
-  // Untuk totalPages, kita tetap butuh total artikel. 
-  // Namun, untuk menghindari timeout, kita ambil batch pertama saja untuk estimasi 
-  // atau gunakan metadata dari feed jika tersedia.
-  // Blogger JSON feed tidak memberikan total count dengan mudah tanpa mengambil semua.
-  // Sebagai solusi efisien: ambil total dari request pertama jika memungkinkan, 
-  // atau gunakan cache jangka panjang untuk totalArticles.
-  
-  const allEntries = await fetchAllEntries(); // Tetap perlu untuk total count, tapi kita optimasi di bawah
-  const totalArticles = allEntries.length;
-  const totalPages = Math.max(1, Math.ceil(totalArticles / perPage));
+  // Ambil sedikit lebih banyak dari perPage untuk menentukan apakah ada halaman berikutnya
+  const entries = await fetchFeedPage(startIndex, perPage + 1);
+  const articles = entries.slice(0, perPage).map(mapEntry);
+  const hasMore = entries.length > perPage;
 
   return {
     articles,
-    totalArticles,
-    totalPages,
+    hasMore,
   };
 }
 
