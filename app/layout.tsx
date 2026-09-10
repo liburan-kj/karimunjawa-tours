@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="preload"
           as="image"
-          href="/_next/image?url=%2Fimages%2Fwimbo.webp&w=750&q=85"
+          href="/images/wimbo.webp"
           fetchPriority="high"
         />
       </head>

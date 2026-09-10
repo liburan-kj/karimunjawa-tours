@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
-import ArticleArchive from "../../../components/ArticleArchive";
+import ArticleArchive from "../../../../components/ArticleArchive";
 import {
   ARTICLES_PER_PAGE,
   getArticleArchivePage,
-} from "../../../lib/blogger";
+} from "../../../../lib/blogger";
+
+export const revalidate = 3600; // ISR: regenerasi halaman maksimal 1x per jam
 
 export async function generateStaticParams() {
   // We no longer use getArticlePageCount to avoid timeouts.

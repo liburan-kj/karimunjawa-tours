@@ -3,7 +3,7 @@ import ArticleArchive from "../../components/ArticleArchive";
 import { ARTICLES_PER_PAGE, getArticleArchivePage } from "../../lib/blogger";
 import { generateBreadcrumbSchema } from "../../lib/jsonld";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // ISR: regenerasi halaman maksimal 1x per jam
 
 export const metadata = {
   title: "Artikel - Karimunjawa Tours",

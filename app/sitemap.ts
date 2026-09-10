@@ -33,7 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-    const totalPages = await getArticlePageCount(ARTICLES_PER_PAGE);
+    // Hitung total halaman dari jumlah artikel (tidak perlu getArticlePageCount)
+    const totalPages = Math.ceil(articles.length / ARTICLES_PER_PAGE);
     archivePages = Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => ({
       url: `${BASE_URL}/artikel/page/${index + 2}`,
       changeFrequency: "weekly",

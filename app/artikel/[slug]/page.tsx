@@ -3,7 +3,18 @@ import { notFound } from "next/navigation";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { generateBreadcrumbSchema } from "../../../lib/jsonld";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // ISR: regenerasi halaman maksimal 1x per jam
+
+// Pre-render 150 artikel terbaru saat build → SSG, tidak timeout di Vercel
+export async function generateStaticParams() {
+  try {
+    const articles = await getAllArticles();
+    return articles.slice(0, 150).map((a) => ({ slug: a.slug }));
+  } catch {
+    // Jika Blogger tidak bisa diakses saat build, skip static generation
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

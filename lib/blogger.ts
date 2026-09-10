@@ -105,11 +105,16 @@ function mapEntry(entry: BloggerEntry): Article {
 }
 
 const FEED_PAGE_SIZE = 150; // batas aman per-request Blogger JSON feed
+const FETCH_TIMEOUT_MS = 8000; // 8 detik — aman di bawah limit Vercel 10 detik (Hobby)
 
 async function fetchFeedPage(startIndex: number, maxResults: number): Promise<BloggerEntry[]> {
   const res = await fetch(
     `${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}&start-index=${startIndex}`,
-    { cache: 'no-store' }
+    {
+      // ISR: cache 1 jam, update background setelah expire
+      next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    }
   );
   if (!res.ok) throw new Error("Gagal fetch artikel Blogger: " + res.status);
   const data = (await res.json()) as BloggerFeedResponse;
@@ -132,13 +137,13 @@ async function fetchAllEntries(): Promise<BloggerEntry[]> {
   return all;
 }
 
-export const getAllArticles = async (): Promise<Article[]> => {
+export const getAllArticles = cache(async (): Promise<Article[]> => {
   const entries = await fetchAllEntries();
   const articles = entries.map(mapEntry);
   // Urutkan terbaru dulu -- feed Blogger default-nya ascending (lama -> baru),
   // jadi tanpa sort ini artikel baru "terkubur" di halaman arsip paling akhir.
   return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-};
+});
 
 export async function getArticleArchivePage(
   page: number,
@@ -161,8 +166,10 @@ export async function getArticleArchivePage(
 // No more getArticlePageCount as it caused server timeouts.
 // Pagination now uses hasMore logic.
 
-
-export const getArticleBySlug = async (slug: string): Promise<Article | null> => {
+// React.cache() = deduplication per-request:
+// generateMetadata dan page component sama-sama memanggil getArticleBySlug(slug),
+// tapi Blogger hanya di-fetch SEKALI berkat cache ini.
+export const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
   // Optimasi: Alih-alih mengambil SEMUA artikel hanya untuk mencari satu slug,
   // kita coba cari di batch pertama (paling baru).
   // Jika tidak ada, baru kita ambil semua (fallback).
@@ -177,4 +184,4 @@ export const getArticleBySlug = async (slug: string): Promise<Article | null> =>
   const allEntries = await fetchAllEntries();
   const allArticles = allEntries.map(mapEntry);
   return allArticles.find((a) => a.slug === slug) ?? null;
-};
+});
