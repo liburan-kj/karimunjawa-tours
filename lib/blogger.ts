@@ -109,7 +109,7 @@ const FEED_PAGE_SIZE = 150; // batas aman per-request Blogger JSON feed
 async function fetchFeedPage(startIndex: number, maxResults: number): Promise<BloggerEntry[]> {
   const res = await fetch(
     `${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}&start-index=${startIndex}`,
-    { next: { revalidate: 3600, tags: ["blogger-articles"] } }
+    { cache: 'no-store' }
   );
   if (!res.ok) throw new Error("Gagal fetch artikel Blogger: " + res.status);
   const data = (await res.json()) as BloggerFeedResponse;
