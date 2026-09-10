@@ -46,12 +46,7 @@ export default async function ArtikelPaginationPage({ params }: { params: Promis
     notFound();
   }
 
-  const totalPages = await getArticlePageCount(ARTICLES_PER_PAGE);
-  if (pageNumber > totalPages) {
-    notFound();
-  }
+  const { articles, hasMore } = await getArticleArchivePage(pageNumber, ARTICLES_PER_PAGE);
 
-  const { articles } = await getArticleArchivePage(pageNumber, ARTICLES_PER_PAGE);
-
-  return <ArticleArchive articles={articles} currentPage={pageNumber} totalPages={totalPages} />;
+  return <ArticleArchive articles={articles} currentPage={pageNumber} hasMore={hasMore} />;
 }
