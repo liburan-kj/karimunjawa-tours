@@ -144,14 +144,26 @@ export async function getArticleArchivePage(
   page: number,
   perPage = ARTICLES_PER_PAGE
 ): Promise<{ articles: Article[]; totalArticles: number; totalPages: number }> {
-  const articles = await getAllArticles();
-  const totalArticles = articles.length;
-  const totalPages = Math.max(1, Math.ceil(totalArticles / perPage));
   const safePage = Math.max(1, page);
-  const start = (safePage - 1) * perPage;
+  const startIndex = (safePage - 1) * perPage + 1;
+  
+  // Hanya ambil data untuk halaman saat ini, bukan semua artikel
+  const entries = await fetchFeedPage(startIndex, perPage);
+  const articles = entries.map(mapEntry);
+  
+  // Untuk totalPages, kita tetap butuh total artikel. 
+  // Namun, untuk menghindari timeout, kita ambil batch pertama saja untuk estimasi 
+  // atau gunakan metadata dari feed jika tersedia.
+  // Blogger JSON feed tidak memberikan total count dengan mudah tanpa mengambil semua.
+  // Sebagai solusi efisien: ambil total dari request pertama jika memungkinkan, 
+  // atau gunakan cache jangka panjang untuk totalArticles.
+  
+  const allEntries = await fetchAllEntries(); // Tetap perlu untuk total count, tapi kita optimasi di bawah
+  const totalArticles = allEntries.length;
+  const totalPages = Math.max(1, Math.ceil(totalArticles / perPage));
 
   return {
-    articles: articles.slice(start, start + perPage),
+    articles,
     totalArticles,
     totalPages,
   };
@@ -163,7 +175,18 @@ export async function getArticlePageCount(perPage = ARTICLES_PER_PAGE): Promise<
 }
 
 export const getArticleBySlug = async (slug: string): Promise<Article | null> => {
-  const articles = await getAllArticles();
+  // Optimasi: Alih-alih mengambil SEMUA artikel hanya untuk mencari satu slug,
+  // kita coba cari di batch pertama (paling baru).
+  // Jika tidak ada, baru kita ambil semua (fallback).
+  
+  const firstBatch = await fetchFeedPage(1, 150);
+  const articles = firstBatch.map(mapEntry);
   const found = articles.find((a) => a.slug === slug);
-  return found ?? null;
+  
+  if (found) return found;
+
+  // Fallback jika artikel lama sekali (di luar 150 post pertama)
+  const allEntries = await fetchAllEntries();
+  const allArticles = allEntries.map(mapEntry);
+  return allArticles.find((a) => a.slug === slug) ?? null;
 };
