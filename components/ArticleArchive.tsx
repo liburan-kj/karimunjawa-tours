@@ -4,14 +4,14 @@ import type { Article } from "../lib/blogger";
 type ArticleArchiveProps = {
   articles: Article[];
   currentPage: number;
-  totalPages: number;
+  hasMore: boolean;
 };
 
 function getPageHref(page: number): string {
   return page <= 1 ? "/artikel" : `/artikel/page/${page}`;
 }
 
-export default function ArticleArchive({ articles, currentPage, totalPages }: ArticleArchiveProps) {
+export default function ArticleArchive({ articles, currentPage, hasMore }: ArticleArchiveProps) {
   return (
     <section className="pages-grid-section">
       <h1 className="pages-grid-title">Artikel Karimunjawa Tours</h1>
@@ -38,7 +38,7 @@ export default function ArticleArchive({ articles, currentPage, totalPages }: Ar
             ))}
           </div>
 
-          {totalPages > 1 && (
+          {currentPage > 1 || hasMore ? (
             <nav className="article-pagination" aria-label="Pagination artikel">
               {currentPage > 1 ? (
                 <Link className="article-pagination-link" href={getPageHref(currentPage - 1)}>
@@ -51,29 +51,15 @@ export default function ArticleArchive({ articles, currentPage, totalPages }: Ar
               )}
 
               <div className="article-pagination-pages">
-                {Array.from({ length: totalPages }, (_, index) => {
-                  const page = index + 1;
-                  if (page === currentPage) {
-                    return (
-                      <span
-                        key={page}
-                        className="article-pagination-page is-active"
-                        aria-current="page"
-                      >
-                        {page}
-                      </span>
-                    );
-                  }
-
-                  return (
-                    <Link key={page} className="article-pagination-page" href={getPageHref(page)}>
-                      {page}
-                    </Link>
-                  );
-                })}
+                <span
+                  className="article-pagination-page is-active"
+                  aria-current="page"
+                >
+                  {currentPage}
+                </span>
               </div>
 
-              {currentPage < totalPages ? (
+              {hasMore ? (
                 <Link className="article-pagination-link" href={getPageHref(currentPage + 1)}>
                   Berikutnya →
                 </Link>
@@ -83,7 +69,7 @@ export default function ArticleArchive({ articles, currentPage, totalPages }: Ar
                 </span>
               )}
             </nav>
-          )}
+          ) : null}
         </>
       )}
     </section>
