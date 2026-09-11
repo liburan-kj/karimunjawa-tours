@@ -18,11 +18,16 @@ export async function GET(request: NextRequest) {
     // 1. Purge Data Cache for Blogger articles
     revalidateTag("blogger-articles", { expire: 0 });
 
-    // 2. Purge all paths under /artikel (including dynamic [slug] pages)
-    // Using 'layout' type purges the path and all its children
+    // 2. Purge halaman listing /artikel (dan /artikel/page/[page])
     revalidatePath("/artikel", "layout");
-    
-    // 3. Purge homepage
+
+    // 3. Purge SEMUA halaman detail /artikel/[slug] yang sudah di-generate statis
+    //    saat build (generateStaticParams). Wajib pakai literal "[slug]" -- ini
+    //    yang sebelumnya hilang, sehingga edit title/isi artikel yang sudah lama
+    //    ter-generate tidak pernah ke-refresh walau revalidateTag sudah jalan.
+    revalidatePath("/artikel/[slug]", "page");
+
+    // 4. Purge homepage
     revalidatePath("/", "layout");
 
     return NextResponse.json({
