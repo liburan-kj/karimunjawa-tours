@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get("secret");
+  const slug = request.nextUrl.searchParams.get("slug");
 
-  // Token rahasia diambil dari Environment Variable, dengan fallback default
   const expectedSecret = process.env.REVALIDATE_SECRET || "karimunjawa-secret-revalidate-key";
 
   if (!secret || secret !== expectedSecret) {
@@ -15,24 +15,23 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // 1. Purge Data Cache for Blogger articles
-    revalidateTag("blogger-articles", { expire: 0 });
+    // 1. Purge Data Cache berdasarkan Tag (Gunakan 2 argumen untuk Next.js 15)
+    revalidateTag("blogger-articles", "max");
 
-    // 2. Purge halaman listing /artikel (dan /artikel/page/[page])
+    // 2. Purge Halaman Listing & Homepage
     revalidatePath("/artikel", "layout");
-
-    // 3. Purge SEMUA halaman detail /artikel/[slug] yang sudah di-generate statis
-    //    saat build (generateStaticParams). Wajib pakai literal "[slug]" -- ini
-    //    yang sebelumnya hilang, sehingga edit title/isi artikel yang sudah lama
-    //    ter-generate tidak pernah ke-refresh walau revalidateTag sudah jalan.
-    revalidatePath("/artikel/[slug]", "page");
-
-    // 4. Purge homepage
     revalidatePath("/", "layout");
+
+    // 3. Purge Spesifik Artikel atau Pattern
+    if (slug) {
+      revalidatePath(`/artikel/${slug}`);
+    } else {
+      revalidatePath("/artikel/[slug]", "page");
+    }
 
     return NextResponse.json({
       revalidated: true,
-      message: "Cache berhasil dibersihkan! Semua data artikel dan homepage telah di-update.",
+      message: "Cache berhasil dibersihkan!",
       timestamp: new Date().toISOString(),
     });
   } catch (err) {

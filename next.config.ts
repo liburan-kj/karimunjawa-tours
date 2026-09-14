@@ -1,88 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // 1. Optimasi Gambar
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85],
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'upload.wikimedia.org',
-      },
-      {
-        protocol: 'https',
-        hostname: 'api.dicebear.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'imgur.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'blogger.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.bp.blogspot.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'bp.blogspot.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '1.bp.blogspot.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '2.bp.blogspot.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '3.bp.blogspot.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '4.bp.blogspot.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn2.behold.pictures',
-      },
-      {
-        protocol: 'https',
-        hostname: 'behold.pictures',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.cdninstagram.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh4.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh5.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh6.googleusercontent.com',
-      },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'upload.wikimedia.org' },
+      { protocol: 'https', hostname: 'api.dicebear.com' },
+      { protocol: 'https', hostname: 'imgur.com' },
+      { protocol: 'https', hostname: 'blogger.googleusercontent.com' },
+      { protocol: 'https', hostname: '**.googleusercontent.com' }, // Menggunakan wildcard ganda **
+      { protocol: 'https', hostname: '**.bp.blogspot.com' },       // Menggunakan wildcard ganda **
+      { protocol: 'https', hostname: 'bp.blogspot.com' },
+      { protocol: 'https', hostname: 'cdn2.behold.pictures' },
+      { protocol: 'https', hostname: 'behold.pictures' },
+      { protocol: 'https', hostname: '**.cdninstagram.com' },
     ],
   },
+
+  // 2. Custom Headers Security & Cache Control
   async headers() {
     return [
       {
@@ -116,10 +54,17 @@ const nextConfig: NextConfig = {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },
+          // MEMUDAHKAN REVALIDATE: Melarang browser menyimpan permanent-cache di lokal PC
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
+          },
         ],
       },
     ];
   },
+
+  // 3. Redirects
   async redirects() {
     return [
       // Halaman paket wisata
@@ -135,7 +80,7 @@ const nextConfig: NextConfig = {
       { source: "/p/tentang-kami.html", destination: "/tentang-kami", permanent: true },
       { source: "/p/instagram.html", destination: "/galeri", permanent: true },
 
-      // Semua artikel Blogger (format /YYYY/MM/slug.html) -> /artikel/slug
+      // Redirect artikel Blogger (/YYYY/MM/slug.html -> /artikel/slug)
       {
         source: "/:year(\\d{4})/:month(\\d{2})/:slug.html",
         destination: "/artikel/:slug",
