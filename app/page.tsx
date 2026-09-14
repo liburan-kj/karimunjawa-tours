@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "../styles/why-travel-with-us.css";
 import Hero from "../components/Hero";
 import WhyTravelWithUs from "../components/WhyTravelWithUs";
 import PackageGrid from "../components/PackageGrid";
