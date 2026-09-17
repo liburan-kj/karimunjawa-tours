@@ -36,6 +36,28 @@ export const proxy = auth(function proxyHandler(req: NextRequest) {
     }
   }
 
+  // --- Nonce & Content Security Policy ---
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const isDev = process.env.NODE_ENV === "development";
+
+  const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https: http: ${isDev ? "'unsafe-eval'" : ""};
+    style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+    img-src 'self' data: blob: https: images.unsplash.com upload.wikimedia.org api.dicebear.com imgur.com *.blogspot.com *.bp.blogspot.com bp.blogspot.com *.googleusercontent.com blogger.googleusercontent.com cdn2.behold.pictures behold.pictures *.cdninstagram.com lh3.googleusercontent.com lh4.googleusercontent.com lh5.googleusercontent.com lh6.googleusercontent.com;
+    connect-src 'self' www.google-analytics.com region1.google-analytics.com featurable.com kjawatours.blogspot.com firestore.googleapis.com *.firebaseio.com identitytoolkit.googleapis.com securetoken.googleapis.com firebasestorage.googleapis.com firebaseinstallations.googleapis.com;
+    frame-src 'self' www.google.com https://www.youtube.com https://www.youtube-nocookie.com;
+    font-src 'self' fonts.gstatic.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+  `.replace(/\s{2,}/g, " ").trim();
+
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", cspHeader);
+
   // --- Markdown Content Negotiation (existing logic) ---
   const accept = req.headers.get("accept") || "";
   const normalizedPath =
@@ -50,14 +72,20 @@ export const proxy = auth(function proxyHandler(req: NextRequest) {
     if (targetMdPath) {
       const url = req.nextUrl.clone();
       url.pathname = targetMdPath;
-      const response = NextResponse.rewrite(url);
+      const response = NextResponse.rewrite(url, {
+        request: { headers: requestHeaders },
+      });
       response.headers.set("Vary", "Accept, Accept-Encoding");
+      response.headers.set("Content-Security-Policy", cspHeader);
       return response;
     }
 
     if (normalizedPath.startsWith("/md/")) {
-      const response = NextResponse.next();
+      const response = NextResponse.next({
+        request: { headers: requestHeaders },
+      });
       response.headers.set("Vary", "Accept, Accept-Encoding");
+      response.headers.set("Content-Security-Policy", cspHeader);
       return response;
     }
 
@@ -76,13 +104,19 @@ export const proxy = auth(function proxyHandler(req: NextRequest) {
         headers: {
           "Content-Type": "text/markdown; charset=utf-8",
           "Vary": "Accept, Accept-Encoding",
+          "Content-Security-Policy": cspHeader,
         },
       });
     }
   }
 
-  const response = NextResponse.next();
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
   response.headers.set("Vary", "Accept, Accept-Encoding");
+  response.headers.set("Content-Security-Policy", cspHeader);
   return response;
 });
 

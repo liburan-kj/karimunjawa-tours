@@ -27,22 +27,6 @@ const nextConfig: NextConfig = {
         source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
         headers: [
           {
-  key: "Content-Security-Policy",
-  value: `
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' www.googletagmanager.com www.google-analytics.com;
-    style-src 'self' 'unsafe-inline' fonts.googleapis.com;
-    img-src 'self' data: blob: https: images.unsplash.com upload.wikimedia.org api.dicebear.com imgur.com *.blogspot.com *.bp.blogspot.com bp.blogspot.com *.googleusercontent.com blogger.googleusercontent.com cdn2.behold.pictures behold.pictures *.cdninstagram.com lh3.googleusercontent.com lh4.googleusercontent.com lh5.googleusercontent.com lh6.googleusercontent.com;
-    connect-src 'self' www.google-analytics.com region1.google-analytics.com featurable.com kjawatours.blogspot.com firestore.googleapis.com *.firebaseio.com identitytoolkit.googleapis.com securetoken.googleapis.com firebasestorage.googleapis.com firebaseinstallations.googleapis.com;
-    frame-src 'self' www.google.com https://www.youtube.com https://www.youtube-nocookie.com;
-    font-src 'self' fonts.gstatic.com;
-    object-src 'none';
-    base-uri 'self';
-    form-action 'self';
-    frame-ancestors 'none';
-  `.replace(/\s+/g, ' ').trim(),
-},
-          {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },

@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -16,7 +17,9 @@ export const metadata = {
   description: "Karimunjawa Tours menyediakan paket wisata Karimunjawa terpercaya dengan harga bersahabat, mulai dari open trip hingga private trip, untuk liburan tak terlupakan.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headersList = await headers();
+  const nonce = headersList.get("x-nonce") ?? undefined;
   const websiteSchema = generateWebsiteSchema();
 
   return (
@@ -32,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={jakarta.variable}>
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         <SiteShell>
@@ -40,8 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-S4MNSBK9Z5"
           strategy="afterInteractive"
+          nonce={nonce}
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="afterInteractive" nonce={nonce}>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

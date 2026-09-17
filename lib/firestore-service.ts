@@ -9,6 +9,10 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
+import {
+  getAllArticles as getAllBloggerArticles,
+  getArticleBySlug as getBloggerArticleBySlug,
+} from "./blogger";
 
 export type TourPackageItem = {
   id: string;
@@ -314,14 +318,37 @@ export async function getArticles(includeDrafts = true): Promise<ArticleItem[]> 
         ...(d.data() as ArticleItem),
         id: d.id,
       }));
-      return includeDrafts ? items : items.filter((a) => a.status === "published");
+      if (items.length > 0) {
+        return includeDrafts ? items : items.filter((a) => a.status === "published");
+      }
     } catch (err) {
       console.warn("Firestore getArticles failed, using fallback:", err);
     }
   }
 
   const localList = getLocal<ArticleItem[]>(LOCAL_STORAGE_KEYS.ARTICLES, []);
-  return includeDrafts ? localList : localList.filter((a) => a.status === "published");
+  if (localList.length > 0) {
+    return includeDrafts ? localList : localList.filter((a) => a.status === "published");
+  }
+
+  // Fallback otomatis ke Blogger feed jika Firestore / Local masih kosong
+  try {
+    const bloggerArticles = await getAllBloggerArticles();
+    return bloggerArticles.map((b) => ({
+      id: b.id,
+      slug: b.slug,
+      title: b.title,
+      excerpt: b.excerpt,
+      content: b.content,
+      featuredImage: b.featuredImage,
+      status: "published" as const,
+      date: b.date,
+      tags: ["Blogger"],
+    }));
+  } catch (err) {
+    console.error("Gagal memuat artikel fallback dari Blogger:", err);
+    return [];
+  }
 }
 
 export const ARTICLES_PER_PAGE = 6;
@@ -362,7 +389,30 @@ export async function getArticleByIdOrSlug(idOrSlug: string): Promise<ArticleIte
   }
 
   const localList = getLocal<ArticleItem[]>(LOCAL_STORAGE_KEYS.ARTICLES, []);
-  return localList.find((a) => a.id === idOrSlug || a.slug === idOrSlug) || null;
+  const localFound = localList.find((a) => a.id === idOrSlug || a.slug === idOrSlug);
+  if (localFound) return localFound;
+
+  // Fallback ke Blogger
+  try {
+    const bloggerItem = await getBloggerArticleBySlug(idOrSlug);
+    if (bloggerItem) {
+      return {
+        id: bloggerItem.id,
+        slug: bloggerItem.slug,
+        title: bloggerItem.title,
+        excerpt: bloggerItem.excerpt,
+        content: bloggerItem.content,
+        featuredImage: bloggerItem.featuredImage,
+        status: "published",
+        date: bloggerItem.date,
+        tags: ["Blogger"],
+      };
+    }
+  } catch {
+    // ignore
+  }
+
+  return null;
 }
 
 export async function saveArticle(article: Partial<ArticleItem>): Promise<ArticleItem> {
