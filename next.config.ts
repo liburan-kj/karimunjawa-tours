@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // 0. Fix untuk jsdom ESM/CJS conflict (html-encoding-sniffer -> @exodus/bytes)
+  serverExternalPackages: ['jsdom'],
+
   // 1. Optimasi Gambar
   images: {
     formats: ['image/avif', 'image/webp'],
