@@ -2,18 +2,22 @@ import { notFound } from "next/navigation";
 import ArticleArchive from "../../../../components/ArticleArchive";
 import {
   ARTICLES_PER_PAGE,
-  getArticleArchivePage,
-} from "../../../../lib/blogger";
+  getFirestoreArticleArchivePage,
+  getArticles,
+} from "../../../../lib/firestore-service";
 
-export const revalidate = 3600; // ISR: regenerasi halaman maksimal 1x per jam
+export const revalidate = 7200; // ISR: regenerasi halaman maksimal 1x per 2 jam
 
 export async function generateStaticParams() {
-  // We no longer use getArticlePageCount to avoid timeouts.
-  // We generate a reasonable number of static pages (e.g., 10)
-  // The rest will be generated on-demand.
-  return Array.from({ length: 9 }, (_, index) => ({
-    page: String(index + 2),
-  }));
+  try {
+    const all = await getArticles(false);
+    const totalPages = Math.ceil(all.length / ARTICLES_PER_PAGE);
+    return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => ({
+      page: String(index + 2),
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ page: string }> }) {
@@ -48,7 +52,11 @@ export default async function ArtikelPaginationPage({ params }: { params: Promis
     notFound();
   }
 
-  const { articles, hasMore } = await getArticleArchivePage(pageNumber, ARTICLES_PER_PAGE);
+  const { articles, hasMore } = await getFirestoreArticleArchivePage(pageNumber, ARTICLES_PER_PAGE);
+
+  if (articles.length === 0) {
+    notFound();
+  }
 
   return <ArticleArchive articles={articles} currentPage={pageNumber} hasMore={hasMore} />;
 }

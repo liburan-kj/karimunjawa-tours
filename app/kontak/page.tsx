@@ -17,7 +17,7 @@ export const metadata: Metadata = {
       "Hubungi Karimunjawa Tours via WhatsApp atau email untuk konsultasi paket wisata dan pemesanan trip ke Kepulauan Karimunjawa.",
     images: [
       {
-        url: "https://karimunjawa.tours/images/satu.jpg",
+        url: "https://karimunjawa.tours/images/satu.png",
         width: 1200,
         height: 630,
         alt: "Hubungi Karimunjawa Tours",
@@ -38,8 +38,8 @@ export default function ContactPage() {
       "@type": "TravelAgency",
       name: "Karimunjawa Tours",
       url: "https://karimunjawa.tours",
-      logo: "https://karimunjawa.tours/images/satu.jpg",
-      image: "https://karimunjawa.tours/images/satu.jpg",
+      logo: "https://karimunjawa.tours/images/satu.png",
+      image: "https://karimunjawa.tours/images/satu.png",
       telephone: "+62-822-2533-6306",
       email: "liburan@karimunjawa.tours",
       address: {

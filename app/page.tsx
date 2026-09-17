@@ -9,6 +9,8 @@ import HomeBookingWidget from "../components/HomeBookingWidget";
 import { getReviews } from "../lib/reviews";
 import { BRAND_ALTERNATE_NAMES, BRAND_SAME_AS } from "../lib/jsonld";
 
+export const revalidate = 7200; // ISR: 2 jam
+
 export const metadata: Metadata = {
   title: "Karimunjawa Tours | Paket Wisata Karimunjawa Terpercaya",
   description:
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
       "Paket tour Karimunjawa 2H1M, 3H2M, 4H3M — hotel & homestay. Snorkeling, penyeberangan Pelabuhan Kartini Jepara, sejak 2015.",
     images: [
       {
-        url: "https://karimunjawa.tours/images/satu.jpg",
+        url: "https://karimunjawa.tours/images/satu.png",
         width: 1200,
         height: 630,
         alt: "Karimunjawa Tours",
@@ -52,8 +54,8 @@ export default async function Home() {
     alternateName: BRAND_ALTERNATE_NAMES,
     identifier: "https://karimunjawa.tours",
     url: "https://karimunjawa.tours",
-    image: "https://karimunjawa.tours/images/satu.jpg",
-    logo: "https://karimunjawa.tours/images/satu.jpg",
+    image: "https://karimunjawa.tours/images/satu.png",
+    logo: "https://karimunjawa.tours/images/satu.png",
     description:
       "Agen wisata lokal terpercaya di Karimunjawa sejak 2015. Menyediakan paket tour all-inclusive 2H1M, 3H2M, 4H3M (hotel & homestay), sewa kapal, snorkeling, dan diving.",
     telephone: "+62-822-2533-6306",

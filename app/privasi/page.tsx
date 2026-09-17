@@ -17,7 +17,7 @@ export const metadata: Metadata = {
       "Kebijakan privasi Karimunjawa Tours mengenai pengumpulan, penggunaan, dan perlindungan data pribadi pelanggan.",
     images: [
       {
-        url: "https://karimunjawa.tours/images/satu.jpg",
+        url: "https://karimunjawa.tours/images/satu.png",
         width: 1200,
         height: 630,
         alt: "Kebijakan Privasi Karimunjawa Tours",
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
       "@type": "Organization",
       name: "Karimunjawa Tours",
       url: "https://karimunjawa.tours",
-      logo: "https://karimunjawa.tours/images/satu.jpg",
+      logo: "https://karimunjawa.tours/images/satu.png",
     },
   };
 

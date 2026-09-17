@@ -1,39 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getActivities, type ActivityItem } from "../lib/firestore-service";
 
-type Activity = {
-  slug: string;
-  title: string;
-  desc: string;
-  img: string;
-  priceLabel: string;
-};
+export default async function ActivityGrid() {
+  let loadedActivities: ActivityItem[] = [];
+  try {
+    loadedActivities = await getActivities();
+  } catch (err) {
+    console.warn("Failed to load activities from firestore:", err);
+  }
 
-const activities: Activity[] = [
-  {
-    slug: "one-day-trip",
-    title: "One Day Trip",
-    desc: "Jelajahi pulau-pulau kecil di sekitar Karimunjawa dengan kapal, mampir ke spot snorkeling dan pantai-pantai tersembunyi.",
-    img: "/images/island-hopping.png",
-    priceLabel: "Mulai 200K",
-  },
-  {
-    slug: "diving-trip",
-    title: "Diving Trip",
-    desc: "Trip menyelam ke spot-spot terbaik Karimunjawa, cocok untuk pemula maupun diver berpengalaman.",
-    img: "/images/scuba-diving.jpg",
-    priceLabel: "Mulai 1.100K",
-  },
-  {
-    slug: "sewa-motor",
-    title: "Sewa Motor",
-    desc: "Sewa motor harian buat eksplorasi Karimunjawa dengan bebas sesuai jadwalmu sendiri.",
-    img: "/images/sewa-motor.jpg",
-    priceLabel: "Mulai 75K",
-  },
-];
+  const activeActivities = loadedActivities.filter((a) => a.isActive !== false);
 
-export default function ActivityGrid() {
   return (
     <section className="activity-grid-section" id="aktivitas">
       <h2 className="pages-grid-title">
@@ -41,13 +19,13 @@ export default function ActivityGrid() {
         Aktivitas Seru di Karimunjawa
       </h2>
       <div className="activity-grid">
-        {activities.map((act) => (
+        {activeActivities.map((act) => (
           <div className="activity-card" key={act.slug}>
             <Link className="activity-card-image-wrap" href={`/aktivitas/${act.slug}`}>
               <Image
                 className="activity-card-img"
                 alt={act.title}
-                src={act.img}
+                src={act.img || "/images/satu.png"}
                 width={1280}
                 height={720}
                 sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
@@ -59,10 +37,14 @@ export default function ActivityGrid() {
             </Link>
             <div className="activity-card-body">
               <span className="activity-card-category">AKTIVITAS</span>
-              <h3 className="activity-card-title"><Link href={`/aktivitas/${act.slug}`}>{act.title}</Link></h3>
+              <h3 className="activity-card-title">
+                <Link href={`/aktivitas/${act.slug}`}>{act.title}</Link>
+              </h3>
               <p className="activity-card-desc">{act.desc}</p>
               <div className="activity-card-footer">
-                <Link className="activity-card-link" href={`/aktivitas/${act.slug}`}>Lihat Detail →</Link>
+                <Link className="activity-card-link" href={`/aktivitas/${act.slug}`}>
+                  Lihat Detail →
+                </Link>
               </div>
             </div>
           </div>

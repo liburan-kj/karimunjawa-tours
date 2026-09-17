@@ -9,6 +9,7 @@ export type Article = {
   excerpt: string;
   content: string;
   featuredImage: string | null;
+  alternateUrl?: string;
 };
 
 type BloggerText = {
@@ -92,6 +93,8 @@ function mapEntry(entry: BloggerEntry): Article {
   const thumb = entry.media$thumbnail?.url;
   const rawFeaturedImage = thumb ? resizeBloggerThumb(thumb) : extractFirstImage(content);
   const featuredImage = rawFeaturedImage ? upgradeToHttps(rawFeaturedImage) : null;
+  const altLink = (entry.link || []).find((l) => l.rel === "alternate");
+  const alternateUrl = altLink?.href ? upgradeToHttps(altLink.href) : undefined;
 
   return {
     id: entry.id?.$t || "",
@@ -101,6 +104,7 @@ function mapEntry(entry: BloggerEntry): Article {
     excerpt: plainText.slice(0, 200),
     content,
     featuredImage,
+    alternateUrl,
   };
 }
 
@@ -111,11 +115,11 @@ async function fetchFeedPage(startIndex: number, maxResults: number): Promise<Bl
   const res = await fetch(
     `${BLOG_URL}/feeds/posts/default?alt=json&max-results=${maxResults}&start-index=${startIndex}`,
     {
-      // ISR: cache 1 jam, update background setelah expire.
+      // ISR: cache 2 jam, update background setelah expire.
       // `tags` WAJIB ada supaya revalidateTag("blogger-articles") di /api/revalidate
       // benar-benar bisa menemukan & menghapus entry cache ini. Tanpa tag ini,
-      // revalidateTag tidak berefek apa-apa (cache tetap dipakai sampai 3600s habis).
-      next: { revalidate: 3600, tags: ["blogger-articles"] },
+      // revalidateTag tidak berefek apa-apa (cache tetap dipakai sampai 7200s habis).
+      next: { revalidate: 7200, tags: ["blogger-articles"] },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     }
   );

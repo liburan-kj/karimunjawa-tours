@@ -46,8 +46,8 @@ export function generateOrganizationSchema() {
     alternateName: BRAND_ALTERNATE_NAMES,
     identifier: BRAND_URL,
     url: BRAND_URL,
-    logo: "https://karimunjawa.tours/images/satu.jpg",
-    image: "https://karimunjawa.tours/images/satu.jpg",
+    logo: "https://karimunjawa.tours/images/satu.png",
+    image: "https://karimunjawa.tours/images/satu.png",
     description: "Karimunjawa Tours melayani wisatawan sejak 2015 dengan paket wisata terpercaya ke Kepulauan Karimunjawa.",
     foundingDate: "2015",
     telephone: "+62-822-2533-6306",
@@ -108,3 +108,54 @@ export function generateServiceSchema() {
     description: "Paket wisata komprehensif ke Kepulauan Karimunjawa dengan akomodasi hotel/homestay, transportasi kapal, tour guide berlisensi, snorkeling, dan island hopping.",
   };
 }
+
+type ArticleSchemaInput = {
+  title: string;
+  excerpt?: string;
+  slug: string;
+  featuredImage?: string | null;
+  date: string;
+  updatedAt?: string;
+};
+
+export function generateArticleSchema(article: ArticleSchemaInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt?.slice(0, 160) || "",
+    url: `${BRAND_URL}/artikel/${article.slug}`,
+    datePublished: article.date,
+    dateModified: article.updatedAt || article.date,
+    ...(article.featuredImage
+      ? {
+          image: {
+            "@type": "ImageObject",
+            url: article.featuredImage.startsWith("http")
+              ? article.featuredImage
+              : `${BRAND_URL}${article.featuredImage}`,
+          },
+        }
+      : {}),
+    author: {
+      "@type": "Organization",
+      name: BRAND_NAME,
+      url: BRAND_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BRAND_NAME,
+      url: BRAND_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BRAND_URL}/images/satu.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BRAND_URL}/artikel/${article.slug}`,
+    },
+    inLanguage: "id-ID",
+  };
+}
+

@@ -29,7 +29,7 @@ type RawReview = {
 };
 
 export async function getReviews(): Promise<ReviewsData> {
-  const res = await fetch(WIDGET_URL, { next: { revalidate: 3600 } });
+  const res = await fetch(WIDGET_URL, { next: { revalidate: 7200 } });
   if (!res.ok) throw new Error("Gagal fetch reviews: " + res.status);
   const data = await res.json();
 

@@ -45,7 +45,7 @@ function mapPost(p: RawWordPressPost): Article {
 
 export async function getAllArticles(): Promise<Article[]> {
   const res = await fetch(`${WP_BASE_URL}/wp-json/wp/v2/posts?_embed&per_page=50`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 7200 },
     headers: {
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     },
@@ -62,7 +62,7 @@ export async function getAllArticles(): Promise<Article[]> {
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const res = await fetch(`${WP_BASE_URL}/wp-json/wp/v2/posts?_embed&slug=${slug}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 7200 },
     headers: {
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     },

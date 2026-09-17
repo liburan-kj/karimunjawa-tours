@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "./auth";
 
 const MARKDOWN_MAP: Record<string, string> = {
   "/": "/md/home",
@@ -19,9 +20,24 @@ const MARKDOWN_MAP: Record<string, string> = {
   "/about": "/md/tentang-kami",
 };
 
-export function proxy(request: NextRequest) {
-  const accept = request.headers.get("accept") || "";
-  const { pathname } = request.nextUrl;
+// Wrap dengan auth() agar req.auth tersedia untuk cek session admin
+export const proxy = auth(function proxyHandler(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // --- Admin Route Protection ---
+  const isAdminRoute = pathname.startsWith("/admin");
+  const isLoginPage = pathname === "/admin/login";
+
+  if (isAdminRoute && !isLoginPage) {
+    // @ts-expect-error — req.auth ditambahkan oleh NextAuth auth() wrapper
+    const session = req.auth;
+    if (!session) {
+      return NextResponse.redirect(new URL("/admin/login", req.url));
+    }
+  }
+
+  // --- Markdown Content Negotiation (existing logic) ---
+  const accept = req.headers.get("accept") || "";
   const normalizedPath =
     pathname.length > 1 && pathname.endsWith("/")
       ? pathname.slice(0, -1)
@@ -32,21 +48,19 @@ export function proxy(request: NextRequest) {
 
   if (wantsMarkdown) {
     if (targetMdPath) {
-      const url = request.nextUrl.clone();
+      const url = req.nextUrl.clone();
       url.pathname = targetMdPath;
       const response = NextResponse.rewrite(url);
       response.headers.set("Vary", "Accept, Accept-Encoding");
       return response;
     }
 
-    // If client requested markdown on a path that starts with /md/, let Next.js route handler handle it
     if (normalizedPath.startsWith("/md/")) {
       const response = NextResponse.next();
       response.headers.set("Vary", "Accept, Accept-Encoding");
       return response;
     }
 
-    // If an AI agent specifically asked for markdown on an unknown / unmapped path, return 404 markdown
     if (
       !normalizedPath.startsWith("/artikel") &&
       !normalizedPath.startsWith("/images") &&
@@ -56,17 +70,7 @@ export function proxy(request: NextRequest) {
       !normalizedPath.startsWith("/llms.txt") &&
       !normalizedPath.startsWith("/llms-full.txt")
     ) {
-      const notFoundMarkdown = `# 404 - Not Found
-
-Halaman yang Anda cari tidak ditemukan.
-
-Dokumentasi dan indeks resmi yang tersedia:
-- Full Documentation: https://karimunjawa.tours/llms-full.txt
-- Quick Index (llms.txt): https://karimunjawa.tours/llms.txt
-- Sitemap: https://karimunjawa.tours/sitemap.xml
-- Paket Wisata: https://karimunjawa.tours/#paket-wisata
-- Beranda: https://karimunjawa.tours/
-`;
+      const notFoundMarkdown = `# 404 - Not Found\n\nHalaman yang Anda cari tidak ditemukan.\n\nDokumentasi dan indeks resmi yang tersedia:\n- Full Documentation: https://karimunjawa.tours/llms-full.txt\n- Quick Index (llms.txt): https://karimunjawa.tours/llms.txt\n- Sitemap: https://karimunjawa.tours/sitemap.xml\n- Paket Wisata: https://karimunjawa.tours/#paket-wisata\n- Beranda: https://karimunjawa.tours/\n`;
       return new NextResponse(notFoundMarkdown, {
         status: 404,
         headers: {
@@ -80,7 +84,7 @@ Dokumentasi dan indeks resmi yang tersedia:
   const response = NextResponse.next();
   response.headers.set("Vary", "Accept, Accept-Encoding");
   return response;
-}
+});
 
 export const config = {
   matcher: [

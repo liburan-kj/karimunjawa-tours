@@ -1,9 +1,13 @@
 import Breadcrumb from "../../components/Breadcrumb";
 import ArticleArchive from "../../components/ArticleArchive";
-import { ARTICLES_PER_PAGE, getArticleArchivePage } from "../../lib/blogger";
+import {
+  ARTICLES_PER_PAGE,
+  getFirestoreArticleArchivePage,
+  type ArticleItem,
+} from "../../lib/firestore-service";
 import { generateBreadcrumbSchema } from "../../lib/jsonld";
 
-export const revalidate = 3600; // ISR: regenerasi halaman maksimal 1x per jam
+export const revalidate = 7200; // ISR: regenerasi halaman maksimal 1x per 2 jam
 
 export const metadata = {
   title: "Artikel - Karimunjawa Tours",
@@ -11,7 +15,7 @@ export const metadata = {
 };
 
 export default async function ArtikelPage() {
-  const { articles, hasMore } = await getArticleArchivePage(1, ARTICLES_PER_PAGE);
+  const { articles, hasMore } = await getFirestoreArticleArchivePage(1, ARTICLES_PER_PAGE);
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { label: "Beranda", href: "/" },

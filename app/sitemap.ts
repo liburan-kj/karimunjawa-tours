@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { ARTICLES_PER_PAGE, getAllArticles } from "../lib/blogger";
+import { ARTICLES_PER_PAGE, getArticles as getFirestoreArticles } from "../lib/firestore-service";
 
 const BASE_URL = "https://karimunjawa.tours";
 
@@ -25,23 +25,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let archivePages: MetadataRoute.Sitemap = [];
 
   try {
-    const articles = await getAllArticles();
-    articlePages = articles.map((a) => ({
+    const published = await getFirestoreArticles(false);
+    
+    articlePages = published.map((a) => ({
       url: `${BASE_URL}/artikel/${a.slug}`,
       lastModified: a.date ? new Date(a.date) : undefined,
       changeFrequency: "monthly",
       priority: 0.6,
     }));
 
-    // Hitung total halaman dari jumlah artikel (tidak perlu getArticlePageCount)
-    const totalPages = Math.ceil(articles.length / ARTICLES_PER_PAGE);
+    const totalPages = Math.ceil(published.length / ARTICLES_PER_PAGE);
     archivePages = Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) => ({
       url: `${BASE_URL}/artikel/page/${index + 2}`,
       changeFrequency: "weekly",
       priority: 0.5,
     }));
   } catch {
-    // kalau fetch Blogger gagal, sitemap tetap jalan tanpa artikel
+    // Ignore error if offline
   }
 
   return [...staticPages, ...articlePages, ...archivePages];

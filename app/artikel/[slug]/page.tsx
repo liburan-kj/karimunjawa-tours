@@ -1,51 +1,60 @@
-import { getArticleBySlug, getAllArticles } from "../../../lib/blogger";
+import { getArticleByIdOrSlug, getArticles } from "../../../lib/firestore-service";
 import { notFound } from "next/navigation";
 import Breadcrumb from "../../../components/Breadcrumb";
-import { generateBreadcrumbSchema } from "../../../lib/jsonld";
+import { generateBreadcrumbSchema, generateArticleSchema } from "../../../lib/jsonld";
 
-export const revalidate = 3600; // ISR: regenerasi halaman maksimal 1x per jam
+export const revalidate = 7200; // ISR: regenerasi halaman maksimal 1x per 2 jam
 
-// Pre-render 150 artikel terbaru saat build → SSG, tidak timeout di Vercel
+// Pre-render seluruh artikel Firestore saat build
 export async function generateStaticParams() {
   try {
-    const articles = await getAllArticles();
-    return articles.slice(0, 150).map((a) => ({ slug: a.slug }));
+    const articles = await getArticles(false);
+    return articles.map((a) => ({ slug: a.slug }));
   } catch {
-    // Jika Blogger tidak bisa diakses saat build, skip static generation
     return [];
   }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = await getArticleBySlug(slug);
-  if (!article) return {};
+  const article = await getArticleByIdOrSlug(slug);
+  if (!article || article.status !== "published") return {};
+
+  const description = article.excerpt?.slice(0, 160) || "";
+  const imageUrl = article.featuredImage
+    ? article.featuredImage.startsWith("http")
+      ? article.featuredImage
+      : `https://karimunjawa.tours${article.featuredImage}`
+    : undefined;
+
   return {
     title: `${article.title} - Karimunjawa Tours`,
-    description: article.excerpt.slice(0, 160),
+    description,
     alternates: {
       canonical: `https://karimunjawa.tours/artikel/${article.slug}`,
     },
     openGraph: {
       title: article.title,
-      description: article.excerpt.slice(0, 160),
-      images: article.featuredImage ? [article.featuredImage] : [],
+      description,
+      type: "article",
+      publishedTime: article.date,
+      modifiedTime: article.updatedAt || article.date,
+      authors: ["Karimunjawa Tours"],
+      images: imageUrl ? [{ url: imageUrl, alt: article.title }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description,
+      images: imageUrl ? [imageUrl] : [],
     },
   };
 }
 
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
-
 export default async function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = await getArticleBySlug(slug);
-  if (!article) notFound();
+  const article = await getArticleByIdOrSlug(slug);
+  if (!article || article.status !== "published") notFound();
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { label: "Beranda", href: "/" },
@@ -53,11 +62,24 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
     { label: article.title },
   ]);
 
+  const articleSchema = generateArticleSchema({
+    title: article.title,
+    excerpt: article.excerpt,
+    slug: article.slug,
+    featuredImage: article.featuredImage,
+    date: article.date,
+    updatedAt: article.updatedAt,
+  });
+
   return (
     <article style={{ maxWidth: 800, margin: "40px auto", padding: "0 20px" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
       <Breadcrumb

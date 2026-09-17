@@ -45,7 +45,7 @@ type RawInstagramPost = {
 };
 
 export async function getInstagramFeed(): Promise<InstagramFeedData> {
-  const res = await fetch(FEED_URL, { next: { revalidate: 3600 } });
+  const res = await fetch(FEED_URL, { next: { revalidate: 7200 } });
   if (!res.ok) throw new Error("Gagal fetch Instagram feed: " + res.status);
   const data = await res.json();
 

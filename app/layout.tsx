@@ -1,8 +1,7 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import SiteShell from "../components/SiteShell";
 import { generateWebsiteSchema } from "../lib/jsonld";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -35,9 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        <Header />
-        {children}
-        <Footer />
+        <SiteShell>
+          {children}
+        </SiteShell>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-S4MNSBK9Z5"
           strategy="afterInteractive"

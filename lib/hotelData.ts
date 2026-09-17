@@ -171,7 +171,7 @@ function extractAll(
 export async function getHotelData(
   duration: "2h1m" | "3h2m" | "4h3m"
 ): Promise<PropertyData> {
-  const res = await fetch(CSV_URL, { next: { revalidate: 3600 } });
+  const res = await fetch(CSV_URL, { next: { revalidate: 7200 } });
   if (!res.ok) throw new Error("Gagal fetch data harga: " + res.status);
   const text = await res.text();
   const rows = parseCSV(text);

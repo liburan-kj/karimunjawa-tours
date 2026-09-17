@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "@tailwindcss/typography";
 
 :root {
   /* Brand palette */
@@ -505,9 +506,17 @@ a { text-decoration: none; color: var(--primary-teal); transition: all 0.3s ease
 }
 .article-body p { margin-bottom: 16px; }
 .article-body img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
+.article-body .image-wrapper { margin: 24px 0; max-width: 100%; }
+.article-body .image-wrapper img { margin: 0; }
+.article-body .iframe-wrapper { margin: 28px 0; max-width: 100%; }
+.article-body iframe { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 0; margin: 24px 0; max-width: 100%; }
+.article-body .iframe-wrapper iframe { margin: 0; }
 .article-body h2, .article-body h3 { color: #023e8a; margin: 28px 0 14px; text-align: left; }
 .article-body a { color: #0a5c8a; text-decoration: underline; }
 .article-body ul, .article-body ol { margin: 0 0 16px 20px; }
+.article-body table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+.article-body th, .article-body td { border: 1px solid #e1edf4; padding: 10px 14px; }
+.article-body th { background: #f4f9fc; color: #0a5c8a; font-weight: 700; }
 
 .article-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; }
 .article-pagination-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
