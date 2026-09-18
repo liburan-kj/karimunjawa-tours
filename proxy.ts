@@ -23,10 +23,14 @@ const MARKDOWN_MAP: Record<string, string> = {
 // Wrap dengan auth() agar req.auth tersedia untuk cek session admin
 export const proxy = auth(function proxyHandler(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const normalizedPath =
+    pathname.length > 1 && pathname.endsWith("/")
+      ? pathname.slice(0, -1)
+      : pathname;
 
   // --- Admin Route Protection ---
-  const isAdminRoute = pathname.startsWith("/admin");
-  const isLoginPage = pathname === "/admin/login";
+  const isAdminRoute = normalizedPath.startsWith("/admin");
+  const isLoginPage = normalizedPath === "/admin/login";
 
   if (isAdminRoute && !isLoginPage) {
     // @ts-expect-error — req.auth ditambahkan oleh NextAuth auth() wrapper
@@ -42,7 +46,7 @@ export const proxy = auth(function proxyHandler(req: NextRequest) {
 
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https: http: ${isDev ? "'unsafe-eval'" : ""};
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""};
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     img-src 'self' data: blob: https: images.unsplash.com upload.wikimedia.org api.dicebear.com imgur.com *.blogspot.com *.bp.blogspot.com bp.blogspot.com *.googleusercontent.com blogger.googleusercontent.com cdn2.behold.pictures behold.pictures *.cdninstagram.com lh3.googleusercontent.com lh4.googleusercontent.com lh5.googleusercontent.com lh6.googleusercontent.com;
     connect-src 'self' www.google-analytics.com region1.google-analytics.com featurable.com kjawatours.blogspot.com firestore.googleapis.com *.firebaseio.com identitytoolkit.googleapis.com securetoken.googleapis.com firebasestorage.googleapis.com firebaseinstallations.googleapis.com;
@@ -52,6 +56,7 @@ export const proxy = auth(function proxyHandler(req: NextRequest) {
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
+    upgrade-insecure-requests;
   `.replace(/\s{2,}/g, " ").trim();
 
   const requestHeaders = new Headers(req.headers);
@@ -60,10 +65,6 @@ export const proxy = auth(function proxyHandler(req: NextRequest) {
 
   // --- Markdown Content Negotiation (existing logic) ---
   const accept = req.headers.get("accept") || "";
-  const normalizedPath =
-    pathname.length > 1 && pathname.endsWith("/")
-      ? pathname.slice(0, -1)
-      : pathname;
 
   const wantsMarkdown = accept.includes("text/markdown");
   const targetMdPath = MARKDOWN_MAP[normalizedPath];
